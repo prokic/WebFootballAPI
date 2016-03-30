@@ -1,0 +1,35 @@
+<head>
+    <title>Leagues</title>
+</head>
+<body>
+<table ng-init="initTeams()" class="table table-bordered">
+    <thead>
+    <tr style="background-color: darkgrey">
+        <th>Short Name</th>
+        <th>Name</th>
+        <th>Squad market value</th>
+        <th>Coat of arms</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="team in teams" style="background-color:mintcream ">
+        <td>{{team.shortName}}</td>
+        <td>{{team.name}}</td>
+        <td>{{team.squadMarketValue}}</td>
+        <td><img ng-src="{{team.crestUrl}}" width="100" height="100"></td>
+        <td>
+            <div class="dropdown">
+                <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">Options
+                    <span class="caret"></span></button>
+                <ul class="dropdown-menu ">
+                    <li><a href="#/season/{{team._links.self.href}}/fixtures">Fixtures</a></li>
+                    <li><a href="#/season/{{team._links.self.href}}/players">Players</a></li>
+                </ul>
+            </div>
+
+        </td>
+    </tr>
+    </tbody>
+
+</table>
+</body>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Leagues</title>
+</head>
+<body>
+<table ng-init="initLeague()" class="table table-bordered">
+    <thead>
+    <tr style="background-color: darkgrey">
+        <th>League</th>
+        <th>Number of teams</th>
+        <th>Current matchday</th>
+        <th>Number of matchdays</th>
+        <th>Number of games</th>
+        <th>Options</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="league in leagues" style="background-color:mintcream ">
+        <td>{{league.caption}}</td>
+        <td>{{league.numberOfTeams}}</td>
+        <td ng-if="league.currentMatchday == 0">All fixtures are played</td>
+        <td ng-if="league.currentMatchday != 0">{{league.currentMatchday}}</td>
+        <td>{{league.numberOfMatchdays}}</td>
+        <td>{{league.numberOfGames}}</td>
+        <td>
+            <div class="dropdown">
+                <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">Options
+                    <span class="caret"></span></button>
+                <ul class="dropdown-menu ">
+                    <li><a href="#/season/{{league.id}}/teams">Teams</a></li>
+                    <li><a href="#/season/{{league.id}}/fixtures">Fixtures</a></li>
+                    <li><a href="#/season/{{league.id}}/players">Players</a></li>
+                </ul>
+            </div>
+
+        </td>
+    </tr>
+    </tbody>
+
+</table>
+</body>
+</html>
