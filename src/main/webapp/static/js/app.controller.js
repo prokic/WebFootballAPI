@@ -43,8 +43,15 @@ WebFootballAPI.controller("FixturesController",function ($scope, $http,$window,$
 });
 WebFootballAPI.controller("TeamController",function ($scope, $http,$window,$routeParams){
 
+    $scope.orderBY = 'name';
+    $scope.reverse = true;
+    $scope.order = function(name) {
+        $scope.reverse = ($scope.orderBY === name) ? !$scope.reverse : false;
+        $scope.orderBY = name;
+    };
+
+
     $scope.initTeams = function() {
-        var s = $routeParams.id;
         $http.get("api/teams/"+$routeParams.id)
             .success(function (data) {
                 $scope.teams = data;

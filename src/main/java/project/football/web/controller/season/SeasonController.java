@@ -25,8 +25,8 @@ public class SeasonController {
         RestTemplate rest = new RestTemplate();
         HttpHeaders httpHeader = new HttpHeaders();
         httpHeader.set("X-Auth-Token",""+xAuthToken.getAuth());
-        SeasonDTO [] arraySes = rest.getForObject("http://api.football-data.org/v1/soccerseasons/?season="+year,SeasonDTO[].class,httpHeader);
-        List<SeasonDTO> listSeasonDTO = Arrays.asList(arraySes);
+        SeasonDTO [] arraySeason = rest.getForObject("http://api.football-data.org/v1/soccerseasons/?season="+year,SeasonDTO[].class,httpHeader);
+        List<SeasonDTO> listSeasonDTO = Arrays.asList(arraySeason);
 
         return new ResponseEntity(listSeasonDTO, HttpStatus.OK);
     }

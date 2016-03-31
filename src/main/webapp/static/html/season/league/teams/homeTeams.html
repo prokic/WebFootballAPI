@@ -5,18 +5,19 @@
 <table ng-init="initTeams()" class="table table-bordered">
     <thead>
     <tr style="background-color: darkgrey">
-        <th>Short Name</th>
-        <th>Name</th>
-        <th>Squad market value</th>
         <th>Coat of arms</th>
+        <th><button ng-click="order('shortName')">Short Name</button></th>
+        <th><button ng-click="order('name')">Name</button></th>
+        <th><button ng-click="order('squadMarketValue')">Squad market value</button></th>
+        <th><button ng-click="orderBY=''"> Set to unsorted </button></th>
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="team in teams" style="background-color:mintcream ">
-        <td>{{team.shortName}}</td>
-        <td>{{team.name}}</td>
-        <td>{{team.squadMarketValue}}</td>
-        <td><img ng-src="{{team.crestUrl}}" width="100" height="100"></td>
+    <tr ng-repeat="team in teams | orderBy:orderBY:reverse" style="background-color:mintcream" >
+        <td><img ng-src="{{team.crestUrl}}" width="50pxx" height="50ppx"></td>
+        <td class="centerR">{{team.shortName}}</td>
+        <td class="centerR">{{team.name}}</td>
+        <td style="vertical-align: middle"><div>{{team.squadMarketValue}}</div> </td>
         <td>
             <div class="dropdown">
                 <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">Options
@@ -26,10 +27,8 @@
                     <li><a href="#/season/{{team._links.self.href}}/players">Players</a></li>
                 </ul>
             </div>
-
         </td>
     </tr>
     </tbody>
-
 </table>
 </body>
