@@ -1,15 +1,17 @@
 package project.football.web.controller.season;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import project.football.value.XAuthToken;
 import project.football.web.dto.json.SeasonDTO;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -20,15 +22,20 @@ public class SeasonController {
     private XAuthToken xAuthToken;
 
     @RequestMapping(value = "/{year}",method = RequestMethod.GET)
-    public ResponseEntity<List<SeasonDTO>> getSeason (@PathVariable String year){
+    public ResponseEntity<SeasonDTO[]> getSeason (@PathVariable String year){
 
-        RestTemplate rest = new RestTemplate();
-        HttpHeaders httpHeader = new HttpHeaders();
-        httpHeader.set("X-Auth-Token",""+xAuthToken.getAuth());
-        SeasonDTO [] arraySeason = rest.getForObject("http://api.football-data.org/v1/soccerseasons/?season="+year,SeasonDTO[].class,httpHeader);
-        List<SeasonDTO> listSeasonDTO = Arrays.asList(arraySeason);
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("X-Auth-Token",xAuthToken.getAuth());
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        ParameterizedTypeReference<List<SeasonDTO>> responseType = new ParameterizedTypeReference<List<SeasonDTO>>() {};
 
-        return new ResponseEntity(listSeasonDTO, HttpStatus.OK);
+        try {
+            ResponseEntity<List<SeasonDTO>> restResult =  restTemplate.exchange("http://api.football-data.org/v1/soccerseasons/?season="+year, HttpMethod.GET, entity, responseType);
+            return new ResponseEntity(restResult.getBody(),HttpStatus.OK);
+        } catch (HttpClientErrorException e) {
+           return new ResponseEntity<>(e.getStatusCode());
+        }
     }
 
 }

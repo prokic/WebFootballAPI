@@ -5,18 +5,20 @@
 <table ng-init="initTeams()" class="table table-bordered">
     <thead>
     <tr style="background-color: darkgrey">
+        <th></th>
         <th>Coat of arms</th>
-        <th><button ng-click="order('shortName')">Short Name</button></th>
-        <th><button ng-click="order('name')">Name</button></th>
-        <th><button ng-click="order('squadMarketValue')">Squad market value</button></th>
-        <th><button ng-click="orderBY=''"> Set to unsorted </button></th>
+        <th><button ng-click="order('shortName')">Short Name<span ng-show="orderBY == 'shortName'" ng-class = 'classArrow'></span></button></th>
+        <th><button ng-click="order('name')">Name<span ng-show="orderBY == 'name'" ng-class = 'classArrow'></span></button></th>
+        <th><button ng-click="order('value')">Squad market value<span ng-show="orderBY == 'value'" ng-class = 'classArrow'></span></button></th>
+        <th><button ng-click="orderBY='';classArrow=''"> Set to unsorted </button></th>
     </tr>
     </thead>
     <tbody>
     <tr ng-repeat="team in teams | orderBy:orderBY:reverse" style="background-color:mintcream" >
+        <td style="vertical-align: middle"><b>{{$index+1}}.</b></td>
         <td><img ng-src="{{team.crestUrl}}" width="50pxx" height="50ppx"></td>
-        <td class="centerR">{{team.shortName}}</td>
-        <td class="centerR">{{team.name}}</td>
+        <td style="vertical-align: middle">{{team.shortName}}</td>
+        <td style="vertical-align: middle">{{team.name}}</td>
         <td style="vertical-align: middle"><div>{{team.squadMarketValue}}</div> </td>
         <td>
             <div class="dropdown">

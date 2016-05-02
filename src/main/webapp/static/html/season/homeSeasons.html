@@ -1,4 +1,9 @@
-<div style="text-align: center">
+<div style="text-align: center;position: fixed;
+     top: 50%;
+     left: 50%;
+     -webkit-transform: translate(-50%, -50%);
+     transform: translate(-50%, -50%)
+" ng-hide="errorMessage != ''">
     <div> Choose season</div>
     <div>
         <select ng-model="godina" ng-change="changeYear()">
@@ -7,6 +12,12 @@
             <option>2015/2016</option>
         </select>
     </div>
-    <a class="btn btn-default" href="#/footballSeason/{{year}}">Potvrdi</a>
+    <a class="btn btn-default" href="#/footballSeason/{{year}}">Confirm</a>
 </div>
+<div style= "position: fixed;
+     top: 50%;
+     left: 50%;
+     -webkit-transform: translate(-50%, -50%);
+     transform: translate(-50%, -50%)" ng-show ="errorMessage != ''">
+    {{errorMessage}}</div>
 

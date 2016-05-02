@@ -5,7 +5,13 @@
     <title>Leagues</title>
 </head>
 <body>
-<table ng-init="initLeague()" class="table table-bordered">
+<!--<div style= "position: fixed;-->
+     <!--top: 50%;-->
+     <!--left: 50%;-->
+     <!-- -webkit-transform: translate(-50%, -50%);-->
+     <!--transform: translate(-50%, -50%)"-->
+     <!--}>{{errorMessage}}</div>-->
+<table ng-init="" class="table table-bordered">
     <thead>
     <tr style="background-color: darkgrey">
         <th>League</th>
@@ -20,7 +26,7 @@
     <tr ng-repeat="league in leagues" style="background-color:mintcream ">
         <td>{{league.caption}}</td>
         <td>{{league.numberOfTeams}}</td>
-        <td ng-if="league.currentMatchday == 0">All fixtures are played</td>
+        <td ng-if="league.currentMatchday == 0">All fixtures were played</td>
         <td ng-if="league.currentMatchday != 0">{{league.currentMatchday}}</td>
         <td>{{league.numberOfMatchdays}}</td>
         <td>{{league.numberOfGames}}</td>
@@ -31,10 +37,9 @@
                 <ul class="dropdown-menu ">
                     <li><a href="#/season/{{league.id}}/teams">Teams</a></li>
                     <li><a href="#/season/{{league.id}}/fixtures">Fixtures</a></li>
-                    <li><a href="#/season/{{league.id}}/players">Players</a></li>
+                    <li><a href="#/season/{{league.id}}/leaguetable">League table</a></li>
                 </ul>
             </div>
-
         </td>
     </tr>
     </tbody>

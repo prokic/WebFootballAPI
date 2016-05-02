@@ -14,7 +14,7 @@ public class TeamDTO {
 
     private String shortName;
 
-    private int squadMarketValue;
+    private String squadMarketValue;
 
     @JsonProperty(value = "crestUrl")
     private String coatOfArms;
@@ -35,17 +35,18 @@ public class TeamDTO {
         this.coatOfArms = coatOfArms;
     }
 
-    public int getSquadMarketValue() {
+    public String getSquadMarketValue() {
         return squadMarketValue;
     }
 
     public void setSquadMarketValue(String squadMarketValue) {
 
-        String s  = squadMarketValue.replace(",","");
-        int index = s.indexOf(" ");
-        int squadValue = Integer.parseInt(s.substring(0,index));
-        this.squadMarketValue = squadValue;
-
+        if (squadMarketValue != null){
+            this.squadMarketValue = squadMarketValue;
+        }
+        else {
+            this.squadMarketValue = "No market value";
+        }
     }
 
     public String getShortName() {

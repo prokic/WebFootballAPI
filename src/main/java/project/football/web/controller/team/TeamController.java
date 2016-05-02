@@ -28,7 +28,6 @@ public class TeamController {
         RestTemplate rest = new RestTemplate();
         HttpHeaders httpHeader = new HttpHeaders();
         httpHeader.set("X-Auth-Token",""+xAuthToken.getAuth());
-//        http://api.football-data.org/v1/soccerseasons/394/teams
         TeamsDTO teamsDTOJSON = rest.getForObject("http://api.football-data.org/v1/soccerseasons/"+id+"/teams",TeamsDTO.class,httpHeader);
         List<TeamDTO> listOfTeams =  teamsDTOJSON.getTeamDTO();
         return new ResponseEntity<>(listOfTeams, HttpStatus.OK);
