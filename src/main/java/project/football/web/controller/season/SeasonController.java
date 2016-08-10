@@ -18,6 +18,8 @@ import java.util.List;
 @RequestMapping("api/season")
 public class SeasonController {
 
+    public static final String Url = "http://api.football-data.org/v1/competitions/?season=";
+
     @Autowired
     private XAuthToken xAuthToken;
 
@@ -31,7 +33,7 @@ public class SeasonController {
         ParameterizedTypeReference<List<SeasonDTO>> responseType = new ParameterizedTypeReference<List<SeasonDTO>>() {};
 
         try {
-            ResponseEntity<List<SeasonDTO>> restResult =  restTemplate.exchange("http://api.football-data.org/v1/soccerseasons/?season="+year, HttpMethod.GET, entity, responseType);
+            ResponseEntity<List<SeasonDTO>> restResult =  restTemplate.exchange(Url+year, HttpMethod.GET, entity, responseType);
             return new ResponseEntity(restResult.getBody(),HttpStatus.OK);
         } catch (HttpClientErrorException e) {
            return new ResponseEntity<>(e.getStatusCode());

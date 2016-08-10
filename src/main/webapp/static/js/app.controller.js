@@ -1,27 +1,17 @@
 WebFootballAPI = angular.module('WebFootballAPI.controller', []);
 
-WebFootballAPI.controller ("HomeController",function ($scope){
-
-});
-
 WebFootballAPI.controller("FootballController", function ($scope) {
 
-    $scope.godina = "2013/2014";
-    $scope.year = "2013";
+    $scope.godina = "2015/2016";
+    $scope.year = "2015";
 
     $scope.changeYear = function (){
         $scope.year = $scope.godina.substring(0,4);
     };
-    $scope.errorMessage = "";
 });
 
 WebFootballAPI.controller("LeagueController", function($scope,liga){
 
-    //$scope.leagues = le.data;
-    //LeagueService.getLeaguee($routeParams.year)
-    //    .then(function(result){
-    //        $scope.leagues = result;
-    //    });
     $scope.leagues = liga;
 });
 
@@ -69,7 +59,7 @@ WebFootballAPI.controller("TeamController",function ($scope, $http,$window,$rout
                 $scope.teams = data;
                 angular.forEach($scope.teams, function(team){
                     if (team.squadMarketValue === 'No market value') {
-
+                         team.value = 0;
                     }
                     else {
                         var str = team.squadMarketValue.replace(/,/g, "").trim();

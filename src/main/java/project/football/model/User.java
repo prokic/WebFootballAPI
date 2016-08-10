@@ -17,8 +17,7 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "xAuth")
-    private String xAuth;
+    private String [] s;
 
     public Long getId() {
         return id;
@@ -30,10 +29,6 @@ public class User {
 
     public String getPassword() {
         return password;
-    }
-
-    public String getxAuth() {
-        return xAuth;
     }
 
     public void setId(Long id) {
@@ -48,8 +43,17 @@ public class User {
         this.password = password;
     }
 
-    public void setxAuth(String xAuth) {
-        this.xAuth = xAuth;
+    String vrati (){
+        StringBuilder p = new StringBuilder();
+        for (String uzim : this.s) {
+            p.append(uzim+",");
+        }
+        p.deleteCharAt(p.length()-1);
+       return  p.toString();
     }
 
+    @Override
+    public String toString() {
+        return "dsjdjsadasdas" +vrati();
+    }
 }

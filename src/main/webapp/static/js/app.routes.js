@@ -4,20 +4,21 @@ WebFootballAPI.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'static/html/home.html',
-            controller : "HomeController"
+            controller : "FootballController"
+        })
+        .when('/home',{
+            templateUrl : 'static/html/home.html',
+            controller : 'FootballController'
         })
         .when('/footballSeason',{
             templateUrl:'static/html/season/homeSeasons.html',
             controller: 'FootballController',
-            data: {
-                message: "hello"
-            }
         })
         .when ('/footballSeason/:year', {
             templateUrl: 'static/html/season/league/homeLeagues.html',
             controller: 'LeagueController',
             resolve: {
-                "liga" : function($route,LeagueService){
+                "liga" : function($route,LeagueService,$routeParams){
                     return LeagueService.getLeaguee($route.current.params.year);
                 }
             }
@@ -31,11 +32,12 @@ WebFootballAPI.config(['$routeProvider', function ($routeProvider) {
             controller : 'TeamController'
         })
         .otherwise({
-            redirectTo: '/'
+            redirectTo: '/home'
         });
-}]).run(function ($rootScope,$location,$timeout) {
+}]).run(function ($rootScope,$location,$timeout,$routeParams) {
 
     var URL = "";
+
     $rootScope.$on("$locationChangeSuccess", function (event,next,current) {
 
         var indexX = current.indexOf("#");
@@ -46,17 +48,19 @@ WebFootballAPI.config(['$routeProvider', function ($routeProvider) {
             URL = current;
         }
     });
-    $rootScope.$on("$routeChangeStart", function () {
-        var s = "dsadasdas";
+    $rootScope.$on("$routeChangeStart", function (current,next) {
     });
     $rootScope.$on("$routeChangeSuccess",function(){
-        var r = "dsadsadsa";
 
     });
+    $rootScope.$on("$routeChangeError", function (current,next){
+    });
+
     $rootScope.$on("$routeChangeError",function(event,next,current,rejection){
-        current.scope.errorMessage = rejection.status.toString()+" "+rejection.statusText;
+        current.scope.errorMessage = "Something went wrong.";
         $timeout(function(){
              $location.path(URL);
         },5000);
     });
+
 });

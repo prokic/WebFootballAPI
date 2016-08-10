@@ -10,4 +10,5 @@ public class WelcomeController {
     public String Welcome(){
         return "static/html/index.html";
     }
+
 }
