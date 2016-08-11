@@ -15,18 +15,9 @@ WebFootballAPI.controller("LeagueController", function($scope,liga){
     $scope.leagues = liga;
 });
 
-WebFootballAPI.controller("FixturesController",function ($scope, $http,$window,$routeParams){
+WebFootballAPI.controller("FixturesController",function ($scope, $http,$routeParams){
 
-    $scope.initFixtures = function() {
-        $http.get("api/fixtures/"+$routeParams.id)
-            .success(function (data) {
-                $scope.fixtures = data;
-            })
-            .error(function () {
-                //$window.location.href = '/footballSeason';
-            });
-
-    };
+    $scope.fixtures = data;
 
 });
 WebFootballAPI.controller("TeamController",function ($scope, $http,$window,$routeParams){

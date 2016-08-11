@@ -29,7 +29,12 @@ WebFootballAPI.config(['$routeProvider', function ($routeProvider) {
         })
         .when ('/season/:id/teams',{
             templateUrl: 'static/html/season/league/teams/homeTeams.html',
-            controller : 'TeamController'
+            controller : 'TeamController',
+            resolve : {
+                 "tim" : function($route,TeamService){
+                     return TeamService.getTeams($route.current.params.id);
+                 }
+            }
         })
         .otherwise({
             redirectTo: '/home'
