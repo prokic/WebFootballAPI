@@ -1,3 +1,3 @@
-WebFootballAPI = angular.module('WebFootballAPI', ['WebFootballAPI.routes','WebFootballAPI.controller','WebFootballAPI.service',
+WebFootballAPI = angular.module('WebFootballAPI', ['WebFootballAPI.routes','WebFootballAPI.controller','WebFootballAPI.service','WebFootballAPI.factory'
                                                     ]);
 

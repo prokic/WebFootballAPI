@@ -2,6 +2,7 @@ package project.football.web.dto.json.team;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.tomcat.util.codec.binary.StringUtils;
 import project.football.web.dto.json.link.LinkIDSelfDTO;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -18,6 +19,8 @@ public class TeamDTO {
 
     @JsonProperty(value = "crestUrl")
     private String coatOfArms;
+
+    private int value;
 
     public LinkIDSelfDTO getId() {
         return id;
@@ -63,5 +66,17 @@ public class TeamDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getValue() {
+        if (this.squadMarketValue != null){
+            String pomocna = this.squadMarketValue;
+            String str = pomocna.replaceAll(",", "").trim();
+            int index = str.indexOf(" ");
+            return Integer.parseInt(str.substring(0,index));
+        }
+        else {
+            return 0;
+        }
     }
 }

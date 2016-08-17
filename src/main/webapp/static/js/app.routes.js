@@ -36,24 +36,29 @@ WebFootballAPI.config(['$routeProvider', function ($routeProvider) {
                  }
             }
         })
+        .when ('/error',{
+            templateUrl : 'static/html/error/error.html',
+            controller : "ErrorController"
+        })
         .otherwise({
             redirectTo: '/home'
         });
-}]).run(function ($rootScope,$location,$timeout,$routeParams) {
+}]).run(function ($rootScope,$location,$timeout,$routeParams,ChangingURL) {
 
     var URL = "";
 
     $rootScope.$on("$locationChangeSuccess", function (event,next,current) {
 
-        var indexX = current.indexOf("#");
+        var indexX = next.indexOf("#");
         if (indexX != -1){
-            URL = current.substr(indexX+2,current.length);
+            URL = next.substr(indexX+2,current.length);
         }
         else {
             URL = current;
         }
     });
     $rootScope.$on("$routeChangeStart", function (current,next) {
+
     });
     $rootScope.$on("$routeChangeSuccess",function(){
 
@@ -62,10 +67,8 @@ WebFootballAPI.config(['$routeProvider', function ($routeProvider) {
     });
 
     $rootScope.$on("$routeChangeError",function(event,next,current,rejection){
-        current.scope.errorMessage = "Something went wrong.";
-        $timeout(function(){
-             $location.path(URL);
-        },5000);
+        ChangingURL.set(URL);
+        $location.path('/error');
     });
 
 });

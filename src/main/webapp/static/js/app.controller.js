@@ -1,5 +1,11 @@
 WebFootballAPI = angular.module('WebFootballAPI.controller', []);
 
+WebFootballAPI.controller("ErrorController", function($scope,ChangingURL){
+
+    $scope.URL = ChangingURL.get();
+
+});
+
 WebFootballAPI.controller("FootballController", function ($scope) {
 
     $scope.godina = "2015/2016";
@@ -15,13 +21,14 @@ WebFootballAPI.controller("LeagueController", function($scope,liga){
     $scope.leagues = liga;
 });
 
-WebFootballAPI.controller("FixturesController",function ($scope, $http,$routeParams){
+WebFootballAPI.controller("FixturesController",function ($scope){
 
     $scope.fixtures = data;
 
 });
-WebFootballAPI.controller("TeamController",function ($scope, $http,$window,$routeParams){
+WebFootballAPI.controller("TeamController",function ($scope,tim){
 
+    $scope.teams = tim;
     $scope.orderBY = '';
     $scope.reverse = false;
     $scope.classArrow = "";
@@ -41,28 +48,6 @@ WebFootballAPI.controller("TeamController",function ($scope, $http,$window,$rout
             $scope.classArrow = "glyphicon glyphicon-arrow-down";
         }
         $scope.orderBY = name;
-    };
-
-
-    $scope.initTeams = function() {
-        $http.get("api/teams/"+$routeParams.id)
-            .success(function (data) {
-                $scope.teams = data;
-                angular.forEach($scope.teams, function(team){
-                    if (team.squadMarketValue === 'No market value') {
-                         team.value = 0;
-                    }
-                    else {
-                        var str = team.squadMarketValue.replace(/,/g, "").trim();
-                        var index = str.indexOf(" ");
-                        team.value = parseInt(str.substr(0,index));
-                    }
-                })
-            })
-            .error(function () {
-                //$window.location.href = '/footballSeason';
-            });
-
     };
 
 });

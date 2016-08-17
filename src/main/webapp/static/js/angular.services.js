@@ -19,7 +19,7 @@ WebFootballAPI.service('TeamService',function($http,$q){
 
     this.getTeams = function (id){
         var deferred = $q.defer();
-        return $http.get("api/fixtures/" + id)
+        return $http.get("api/teams/" + id)
             .then(function (response) {
                 deferred.resolve(response.data);
                 return deferred.promise;
