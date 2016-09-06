@@ -1,0 +1,35 @@
+<div class="container text-center">
+    <div class="row">
+        <div class="col-lg-12" style="font-size: 200%">{{leagues.leagueCaption}}</div>
+    </div>
+</div>
+<table class="table table-bordered">
+    <thead>
+    <tr style="background-color: darkgrey">
+        <th>Position</th>
+        <th>Team name</th>
+        <th>Played games</th>
+        <th>Points</th>
+        <th>Goals</th>
+        <th>Options</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="league in leagues.standing | orderBy:'position'" style="background-color:mintcream ">
+        <td>{{league.position}}</td>
+        <td><a href="#/season/{{league.id}}/teams">{{league.teamName}}</a></td>
+        <td>{{league.playedGames}}</td>
+        <td>{{league.points}}</td>
+        <td>{{league.goals}}</td>
+        <td>
+            <div class="dropdown">
+                <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">Options
+                    <span class="caret"></span></button>
+                <ul class="dropdown-menu ">
+                    <li><a href="#/season/{{league.id}}/teams">See more about team</a></li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>

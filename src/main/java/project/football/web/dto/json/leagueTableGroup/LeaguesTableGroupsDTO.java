@@ -1,21 +1,19 @@
-package project.football.web.dto.json.LeagueTable;
+package project.football.web.dto.json.leagueTableGroup;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import project.football.web.dto.json.link.LinkSelfDTO;
 
-import java.util.List;
-
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class LeagueTablesDTO {
+public class LeaguesTableGroupsDTO {
 
     @JsonProperty(value = "leagueCaption")
     private String name;
 
     private int matchday;
 
-    @JsonProperty(value = "standing")
-    private List<LeagueTableDTO> teams;
+    private GroupS standings;
 
     @JsonProperty(value = "_links")
     private LinkSelfDTO linkSelfDTO;
@@ -36,12 +34,12 @@ public class LeagueTablesDTO {
         this.matchday = matchday;
     }
 
-    public List<LeagueTableDTO> getTeams() {
-        return teams;
+    public GroupS getStandings() {
+        return standings;
     }
 
-    public void setTeams(List<LeagueTableDTO> teams) {
-        this.teams = teams;
+    public void setStandings(GroupS standings) {
+        this.standings = standings;
     }
 
     public LinkSelfDTO getLinkSelfDTO() {

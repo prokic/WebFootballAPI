@@ -1,12 +1,12 @@
 WebFootballAPI = angular.module('WebFootballAPI.factory', []);
 
 WebFootballAPI.factory('ChangingURL', function() {
-    var savedData = {}
+    var savedURL = {}
     function set(data) {
-        savedData = data;
+        savedURL = data;
     }
     function get() {
-        return savedData;
+        return savedURL;
     }
 
     return {

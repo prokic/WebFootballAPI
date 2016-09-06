@@ -39,6 +39,8 @@ public class TeamController {
             ResponseEntity<TeamsDTO> restResult =  restTemplate.exchange(Url_Part_One+id+Url_Part_Two, HttpMethod.GET, entity, responseType);
             TeamsDTO ResultEntity = restResult.getBody();
 
+
+
             return new ResponseEntity(ResultEntity.getTeamDTO(),HttpStatus.OK);
         } catch (HttpClientErrorException e) {
             return new ResponseEntity<>(e.getStatusCode());

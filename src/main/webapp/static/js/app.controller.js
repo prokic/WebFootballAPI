@@ -16,16 +16,26 @@ WebFootballAPI.controller("FootballController", function ($scope) {
     };
 });
 
-WebFootballAPI.controller("LeagueController", function($scope,liga){
+WebFootballAPI.controller("LeagueController", function($scope,liga,$routeParams){
 
     $scope.leagues = liga;
+
+    $scope.groupLeague = function(league){
+        var group = league.league;
+        if (group == 'CL' || group == 'EL' || group == 'EC' || group == 'WC'){
+            $routeParams.proba = true;
+        }
+        else {
+            $routeParams.proba = false;
+        }
+    }
 });
 
-WebFootballAPI.controller("FixturesController",function ($scope){
+WebFootballAPI.controller("TableController",function ($scope,table){
 
-    $scope.fixtures = data;
-
+    $scope.leagues = table;
 });
+
 WebFootballAPI.controller("TeamController",function ($scope,tim){
 
     $scope.teams = tim;
@@ -51,6 +61,13 @@ WebFootballAPI.controller("TeamController",function ($scope,tim){
     };
 
 });
+
+WebFootballAPI.controller("FixturesController",function ($scope){
+
+    $scope.fixtures = data;
+
+});
+
 WebFootballAPI.controller("LeagueTableController",function ($scope, $http,$window,$routeParams){
 
     $scope.initFixtures = function() {

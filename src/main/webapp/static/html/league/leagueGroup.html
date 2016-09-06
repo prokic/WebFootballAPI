@@ -1,0 +1,25 @@
+<table class="table table-bordered">
+    <thead>
+    <tr style="background-color: darkgrey">
+        <th>Position</th>
+        <th>Team name</th>
+        <th></th>
+        <th>Points</th>
+        <th>Goals</th>
+        <th>Options</th>
+        <th>GA</th>
+        <th>GD</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="league in leagues.standing | orderBy:'rank'" style="background-color:mintcream ">
+        <td>{{league.position}}</td>
+        <td><a href="#/season/{{league.id}}/teams">{{league.teamName}}</a></td>
+        <td>{{league.playedGames}}</td>
+        <td>{{league.points}}</td>
+        <td>{{league.goals}}</td>
+        <td>
+        </td>
+    </tr>
+    </tbody>
+</table>

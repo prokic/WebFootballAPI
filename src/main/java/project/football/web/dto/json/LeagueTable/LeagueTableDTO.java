@@ -2,20 +2,17 @@ package project.football.web.dto.json.LeagueTable;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import project.football.web.dto.json.link.LinkIDTeamDTO;
+import project.football.web.dto.json.link.LinkIDSelfDTO;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LeagueTableDTO {
 
     @JsonProperty(value = "_links")
-    private LinkIDTeamDTO linkIDTeamDTO;
+    private LinkIDSelfDTO linkIDSelfDTO;
 
     private int position;
 
     private String teamName;
-
-    @JsonProperty(value = "crestURI")
-    private String picture;
 
     private int playedGames;
 
@@ -37,12 +34,12 @@ public class LeagueTableDTO {
 
     private HomeAwayDTO away;
 
-    public LinkIDTeamDTO getLinkIDTeamDTO() {
-        return linkIDTeamDTO;
+    public LinkIDSelfDTO getLinkIDSelfDTO() {
+        return linkIDSelfDTO;
     }
 
-    public void setLinkIDTeamDTO(LinkIDTeamDTO linkIDTeamDTO) {
-        this.linkIDTeamDTO = linkIDTeamDTO;
+    public void setLinkIDSelfDTO(LinkIDSelfDTO linkIDSelfDTO) {
+        this.linkIDSelfDTO = linkIDSelfDTO;
     }
 
     public HomeAwayDTO getAway() {
@@ -123,14 +120,6 @@ public class LeagueTableDTO {
 
     public void setPlayedGames(int playedGames) {
         this.playedGames = playedGames;
-    }
-
-    public String getPicture() {
-        return picture;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
     }
 
     public int getPosition() {

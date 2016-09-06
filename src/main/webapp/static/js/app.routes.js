@@ -10,10 +10,6 @@ WebFootballAPI.config(['$routeProvider', function ($routeProvider) {
             templateUrl : 'static/html/home.html',
             controller : 'FootballController'
         })
-        .when('/footballSeason',{
-            templateUrl:'static/html/season/homeSeasons.html',
-            controller: 'FootballController',
-        })
         .when ('/footballSeason/:year', {
             templateUrl: 'static/html/season/league/homeLeagues.html',
             controller: 'LeagueController',
@@ -36,6 +32,29 @@ WebFootballAPI.config(['$routeProvider', function ($routeProvider) {
                  }
             }
         })
+        // .when('/season/:id/leaguetable',{
+        //     templateUrl: 'static/html/league/league.html',
+        //     controller: 'TableController',
+        //     resolve : {
+        //        "table" : function($route,LeagueTableService){
+        //            return LeagueTableService.getLeagueTable($route.current.params.id);
+        //        }
+        //     }
+        // })
+        .when('/season/:id/leaguetable',{
+            templateUrl: 'static/html/league/league.html',
+            controller: 'TableController',
+            resolve : {
+                "table" : function($route,LeagueTableService,$routeParams){
+                    if ($routeParams.proba){
+                        return LeagueTableService.getLeagueTableGroup($route.current.params.id);
+                    }
+                    else {
+                        return LeagueTableService.getLeagueTable($route.current.params.id);
+                    }
+                }
+            }
+        })
         .when ('/error',{
             templateUrl : 'static/html/error/error.html',
             controller : "ErrorController"
@@ -43,22 +62,14 @@ WebFootballAPI.config(['$routeProvider', function ($routeProvider) {
         .otherwise({
             redirectTo: '/home'
         });
-}]).run(function ($rootScope,$location,$timeout,$routeParams,ChangingURL) {
 
-    var URL = "";
+}]).run(function ($rootScope,$location,ChangingURL) {
 
     $rootScope.$on("$locationChangeSuccess", function (event,next,current) {
 
-        var indexX = next.indexOf("#");
-        if (indexX != -1){
-            URL = next.substr(indexX+2,current.length);
-        }
-        else {
-            URL = current;
-        }
     });
     $rootScope.$on("$routeChangeStart", function (current,next) {
-
+        var s = "dsdsadasd";
     });
     $rootScope.$on("$routeChangeSuccess",function(){
 
@@ -67,7 +78,7 @@ WebFootballAPI.config(['$routeProvider', function ($routeProvider) {
     });
 
     $rootScope.$on("$routeChangeError",function(event,next,current,rejection){
-        ChangingURL.set(URL);
+        ChangingURL.set(rejection.config.url);
         $location.path('/error');
     });
 
