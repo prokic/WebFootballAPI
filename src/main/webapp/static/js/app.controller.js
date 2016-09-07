@@ -34,6 +34,7 @@ WebFootballAPI.controller("LeagueController", function($scope,liga,$routeParams)
 WebFootballAPI.controller("TableController",function ($scope,table){
 
     $scope.leagues = table;
+    $scope.grupa = angular.isDefined($scope.leagues.standings);
 });
 
 WebFootballAPI.controller("TeamController",function ($scope,tim){

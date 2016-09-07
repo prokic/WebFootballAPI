@@ -1,6 +1,6 @@
 WebFootballAPI = angular.module('WebFootballAPI.routes', ['ngRoute']);
 
-WebFootballAPI.config(['$routeProvider', function ($routeProvider) {
+WebFootballAPI.config(['$routeProvider', function ($routeProvider,table) {
     $routeProvider
         .when('/', {
             templateUrl: 'static/html/home.html',
@@ -14,7 +14,7 @@ WebFootballAPI.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'static/html/season/league/homeLeagues.html',
             controller: 'LeagueController',
             resolve: {
-                "liga" : function($route,LeagueService,$routeParams){
+                "liga" : function($route,LeagueService){
                     return LeagueService.getLeaguee($route.current.params.year);
                 }
             }
@@ -42,7 +42,8 @@ WebFootballAPI.config(['$routeProvider', function ($routeProvider) {
         //     }
         // })
         .when('/season/:id/leaguetable',{
-            templateUrl: 'static/html/league/league.html',
+            template: '<div ng-if="grupa"><league-table-group></league-table-group></div>' +
+            '<div ng-if="!(grupa)"><league-table></league-table></div>',
             controller: 'TableController',
             resolve : {
                 "table" : function($route,LeagueTableService,$routeParams){

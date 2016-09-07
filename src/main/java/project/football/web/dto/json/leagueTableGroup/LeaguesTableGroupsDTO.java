@@ -5,6 +5,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import project.football.web.dto.json.link.LinkSelfDTO;
 
+import java.lang.reflect.Array;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LeaguesTableGroupsDTO {
 
@@ -13,7 +19,7 @@ public class LeaguesTableGroupsDTO {
 
     private int matchday;
 
-    private GroupS standings;
+    private ArrayList<List<LeagueTableGroupDTO>> standings;
 
     @JsonProperty(value = "_links")
     private LinkSelfDTO linkSelfDTO;
@@ -34,12 +40,38 @@ public class LeaguesTableGroupsDTO {
         this.matchday = matchday;
     }
 
-    public GroupS getStandings() {
+    public ArrayList<List<LeagueTableGroupDTO>> getStandings() {
         return standings;
     }
 
     public void setStandings(GroupS standings) {
-        this.standings = standings;
+
+        Class c = standings.getClass();
+        ArrayList<List<LeagueTableGroupDTO>> listOfListsOfObjects = new ArrayList<>();
+
+        for (char i = 'A'; i <= 'L'; i++) {
+
+            try {
+                Method m = c.getMethod("getGroup"+i);
+                List<LeagueTableGroupDTO> listOfGroupObjects = (List<LeagueTableGroupDTO>) m.invoke(standings);
+
+                if (listOfGroupObjects != null){
+                    listOfListsOfObjects.add(listOfGroupObjects);
+                }
+                else {
+                    break;
+                }
+
+            } catch (NoSuchMethodException e) {
+                System.out.println(e.toString());
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+
+        this.standings = listOfListsOfObjects;
     }
 
     public LinkSelfDTO getLinkSelfDTO() {

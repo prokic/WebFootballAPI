@@ -1,16 +1,14 @@
 WebFootballAPI = angular.module('WebFootballAPI.directives', [])
 
-WebFootballAPI.directives('leagueTable',function(){
+WebFootballAPI.directive('leagueTable',function(){
     return {
         restrict: 'E',
         templateUrl: 'static/html/league/league.html',
-        controller: 'LeagueController'
     }
 });
-WebFootballAPI.directives('leagueTableGroup',function(){
+WebFootballAPI.directive('leagueTableGroup',function(){
     return {
         restrict: 'E',
         templateUrl: 'static/html/league/leagueGroup.html',
-        controller: 'LeagueController'
     }
 });

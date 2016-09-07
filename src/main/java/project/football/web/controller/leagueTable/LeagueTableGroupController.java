@@ -44,19 +44,6 @@ public class LeagueTableGroupController {
             ResponseEntity<LeaguesTableGroupsDTO> restResult =  restTemplate.exchange(Url_1st_Part+id+Url_2nd_Part, HttpMethod.GET, entity, responseType);
             LeaguesTableGroupsDTO ResultEntity = restResult.getBody();
 
-            GroupS cls = ResultEntity.getStandings();
-            Class c = cls.getClass();
-
-            try {
-                Method m = c.getMethod("getGroupA");
-                System.out.println("method = " + m.toString());
-            }
-
-            catch(NoSuchMethodException e) {
-                System.out.println(e.toString());
-            }
-
-
             return new ResponseEntity(ResultEntity, HttpStatus.OK);
         } catch (HttpClientErrorException e) {
             return new ResponseEntity<>(e.getStatusCode());

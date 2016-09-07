@@ -35,7 +35,7 @@ WebFootballAPI.service('LeagueTableService',function($http,$q){
 
     this.getLeagueTable = function (id){
         var deferred = $q.defer();
-        return $http.get("api/leaguetable/group/" + id)
+        return $http.get("api/leaguetable/" + id)
             .then(function (response) {
                 deferred.resolve(response.data);
                 return deferred.promise;

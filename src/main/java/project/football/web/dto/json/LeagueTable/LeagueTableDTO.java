@@ -2,6 +2,7 @@ package project.football.web.dto.json.LeagueTable;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import project.football.web.dto.json.link.LinkIDTeamDTO;
 import project.football.web.dto.json.link.LinkIDSelfDTO;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
