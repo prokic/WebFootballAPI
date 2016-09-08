@@ -22,12 +22,7 @@ WebFootballAPI.controller("LeagueController", function($scope,liga,$routeParams)
 
     $scope.groupLeague = function(league){
         var group = league.league;
-        if (group == 'CL' || group == 'EL' || group == 'EC' || group == 'WC'){
-            $routeParams.proba = true;
-        }
-        else {
-            $routeParams.proba = false;
-        }
+        $routeParams.proba = !!(group == 'CL' || group == 'EL' || group == 'EC' || group == 'WC');
     }
 });
 
@@ -35,6 +30,9 @@ WebFootballAPI.controller("TableController",function ($scope,table){
 
     $scope.leagues = table;
     $scope.grupa = angular.isDefined($scope.leagues.standings);
+    $scope.broj = function () {
+        return ( $scope.leagues.standings.length);
+    }
 });
 
 WebFootballAPI.controller("TeamController",function ($scope,tim){
