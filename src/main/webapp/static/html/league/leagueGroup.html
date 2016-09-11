@@ -1,5 +1,5 @@
 <div >
-    <span>Group: </span><button type="button" class="btn btn-default" ng-repeat="n in [] | range : broj()" ng-click="changeGroup($index)">{{n}}</button>
+    <span>Group: </span><button type="button" class="{{makeAClass($index)}}" ng-repeat="n in [] | range : broj()" ng-click="changeGroup($index)">{{n}}</button>
 </div>
 <table class="table table-bordered">
     <thead>
