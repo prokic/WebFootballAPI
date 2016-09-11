@@ -14,6 +14,12 @@ WebFootballAPI.controller("FootballController", function ($scope) {
     $scope.changeYear = function (){
         $scope.year = $scope.godina.substring(0,4);
     };
+    $scope.prvi = 1;
+    $scope.promenaBoje = function (index) {
+        $scope.prvi = index;
+        // return ((index % 2) == 0) ? "text-primary" : "text-success";
+    };
+
 });
 
 WebFootballAPI.controller("LeagueController", function($scope,liga,$routeParams){
@@ -30,9 +36,14 @@ WebFootballAPI.controller("TableController",function ($scope,table){
 
     $scope.leagues = table;
     $scope.grupa = angular.isDefined($scope.leagues.standings);
+    $scope.leagueGroupTeams = $scope.leagues.standings[0];
     $scope.broj = function () {
         return ( $scope.leagues.standings.length);
     }
+    $scope.changeGroup = function (index) {
+        $scope.leagueGroupTeams = $scope.leagues.standings[index];
+    }
+
 });
 
 WebFootballAPI.controller("TeamController",function ($scope,tim){
