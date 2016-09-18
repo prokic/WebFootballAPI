@@ -10,19 +10,16 @@
         <th>Goals</th>
         <th>GA</th>
         <th>GD</th>
-        <th>Options</th>
     </tr>
     </thead>
     <tbody>
     <tr ng-repeat="league in leagueGroupTeams | orderBy:'rank'" style="background-color:mintcream ">
         <td>{{league.rank}}</td>
-        <td><a href="#/season/{{league.id}}/teams">{{league.team}}</a></td>
-        <td class="">{{league.points}}</td>
-        <!--<td>{{league.playedGames}}</td>-->
+        <td><a href="#/season/{{league.teamId}}/team">{{league.team}}</a></td>
+        <td>{{league.points}}</td>
         <td>{{league.goals}}</td>
-        <td>{{league.goalsAgaints}}</td>
-        <td>{{league.goalsDifference}}</td>
-        <td></td>
+        <td>{{league.goalsAgainst}}</td>
+        <td>{{league.goalDifference}}</td>
     </tr>
     </tbody>
 </table>

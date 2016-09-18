@@ -25,29 +25,29 @@ WebFootballAPI.config(['$routeProvider', function ($routeProvider,table) {
         })
         .when ('/season/:id/teams',{
             templateUrl: 'static/html/season/league/teams/homeTeams.html',
-            controller : 'TeamController',
+            controller : 'TeamsController',
             resolve : {
-                 "tim" : function($route,TeamService){
-                     return TeamService.getTeams($route.current.params.id);
+                 "tim" : function($route,TeamsService){
+                     return TeamsService.getTeams($route.current.params.id);
                  }
             }
         })
-        // .when('/season/:id/leaguetable',{
-        //     templateUrl: 'static/html/league/league.html',
-        //     controller: 'TableController',
-        //     resolve : {
-        //        "table" : function($route,LeagueTableService){
-        //            return LeagueTableService.getLeagueTable($route.current.params.id);
-        //        }
-        //     }
-        // })
+        .when('/season/:id/team',{
+            templateUrl: 'static/html/team/teamHome.html',
+            controller: 'TeamController',
+            resolve : {
+               "teamResolve" : function($route,TeamService){
+                   return TeamService.getTeam($route.current.params.id);
+               }
+            }
+        })
         .when('/season/:id/leaguetable',{
             template: '<div ng-if="grupa"><league-table-group></league-table-group></div>' +
             '<div ng-if="!(grupa)"><league-table></league-table></div>',
             controller: 'TableController',
             resolve : {
-                "table" : function($route,LeagueTableService,$routeParams){
-                    if ($routeParams.proba){
+                "table" : function($route,LeagueTableService,TableResolve){
+                    if (TableResolve.get()){
                         return LeagueTableService.getLeagueTableGroup($route.current.params.id);
                     }
                     else {

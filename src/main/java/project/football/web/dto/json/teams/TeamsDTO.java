@@ -1,4 +1,4 @@
-package project.football.web.dto.json.team;
+package project.football.web.dto.json.teams;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

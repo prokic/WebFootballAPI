@@ -15,3 +15,19 @@ WebFootballAPI.factory('ChangingURL', function() {
     }
 
 });
+
+WebFootballAPI.factory('TableResolve', function() {
+    var compare;
+    function set(data) {
+        compare = data;
+    }
+    function get() {
+        return compare;
+    }
+
+    return {
+        set: set,
+        get: get
+    }
+
+});

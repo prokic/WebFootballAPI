@@ -11,7 +11,6 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import project.football.value.XAuthToken;
 import project.football.web.dto.json.LeagueTable.LeagueTablesDTO;
-import project.football.web.dto.json.team.TeamsDTO;
 
 @RestController
 @RequestMapping("api/leaguetable")

@@ -2,14 +2,14 @@ package project.football.web.dto.json.LeagueTable;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import project.football.web.dto.json.link.LinkIDTeamDTO;
 import project.football.web.dto.json.link.LinkIDSelfDTO;
+import project.football.web.dto.json.link.LinkIDTeamDTO;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LeagueTableDTO {
 
     @JsonProperty(value = "_links")
-    private LinkIDSelfDTO linkIDSelfDTO;
+    private LinkIDTeamDTO linkIDTeamDTO;
 
     private int position;
 
@@ -35,12 +35,12 @@ public class LeagueTableDTO {
 
     private HomeAwayDTO away;
 
-    public LinkIDSelfDTO getLinkIDSelfDTO() {
-        return linkIDSelfDTO;
+    public LinkIDTeamDTO getLinkIDTeamDTO() {
+        return linkIDTeamDTO;
     }
 
-    public void setLinkIDSelfDTO(LinkIDSelfDTO linkIDSelfDTO) {
-        this.linkIDSelfDTO = linkIDSelfDTO;
+    public void setLinkIDTeamDTO(LinkIDTeamDTO linkIDTeamDTO) {
+        this.linkIDTeamDTO = linkIDTeamDTO;
     }
 
     public HomeAwayDTO getAway() {

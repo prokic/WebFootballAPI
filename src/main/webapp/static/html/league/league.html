@@ -12,7 +12,7 @@
     <tbody>
     <tr ng-repeat="league in leagues.standing | orderBy:'position'" style="background-color:mintcream ">
         <td>{{league.position}}</td>
-        <td><a href="#/season/{{league.id}}/teams">{{league.teamName}}</a></td>
+        <td><a href="#/season/{{league._links.team.href}}/teams">{{league.teamName}}</a></td>
         <td>{{league.playedGames}}</td>
         <td>{{league.points}}</td>
         <td>{{league.goals}}</td>
@@ -21,7 +21,7 @@
                 <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">Options
                     <span class="caret"></span></button>
                 <ul class="dropdown-menu ">
-                    <li><a href="#/season/{{league._links.team.href}}/teams">See more about team</a></li>
+                    <li><a href="#/season/{{league._links.team.href}}/team">See more about team</a></li>
                 </ul>
             </div>
         </td>

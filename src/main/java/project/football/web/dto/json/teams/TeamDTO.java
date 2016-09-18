@@ -1,8 +1,7 @@
-package project.football.web.dto.json.team;
+package project.football.web.dto.json.teams;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.apache.tomcat.util.codec.binary.StringUtils;
 import project.football.web.dto.json.link.LinkIDSelfDTO;
 
 @JsonIgnoreProperties(ignoreUnknown = true)

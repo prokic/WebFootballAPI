@@ -23,9 +23,9 @@ public class LeagueTableGroupDTO {
 
     private int goals;
 
-    private int goalsAgaints;
+    private int goalsAgainst;
 
-    private int goalsDifference;
+    private int goalDifference;
 
     public String getGroup() {
         return group;
@@ -91,19 +91,19 @@ public class LeagueTableGroupDTO {
         this.goals = goals;
     }
 
-    public int getGoalsAgaints() {
-        return goalsAgaints;
+    public int getGoalsAgainst() {
+        return goalsAgainst;
     }
 
-    public void setGoalsAgaints(int goalsAgaints) {
-        this.goalsAgaints = goalsAgaints;
+    public void setGoalsAgainst(int goalsAgainst) {
+        this.goalsAgainst = goalsAgainst;
     }
 
-    public int getGoalsDifference() {
-        return goalsDifference;
+    public int getGoalDifference() {
+        return goalDifference;
     }
 
-    public void setGoalsDifference(int goalsDifference) {
-        this.goalsDifference = goalsDifference;
+    public void setGoalDifference(int goalDifference) {
+        this.goalDifference = goalDifference;
     }
 }

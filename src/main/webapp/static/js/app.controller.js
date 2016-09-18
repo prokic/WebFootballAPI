@@ -17,13 +17,18 @@ WebFootballAPI.controller("FootballController", function ($scope) {
 
 });
 
-WebFootballAPI.controller("LeagueController", function($scope,liga,$routeParams){
+WebFootballAPI.controller("LeagueController", function($scope,liga,TableResolve){
 
     $scope.leagues = liga;
 
     $scope.groupLeague = function(league){
         var group = league.league;
-        $routeParams.proba = !!(group == 'CL' || group == 'EL' || group == 'EC' || group == 'WC');
+        if (group == 'CL' || group == 'EL' || group == 'EC' || group == 'WC'){
+            TableResolve.set(true)
+        }
+        else {
+            TableResolve.set(false);
+        }
     };
 
 });
@@ -32,24 +37,9 @@ WebFootballAPI.controller("TableController",function ($scope,table){
 
     $scope.leagues = table;
     $scope.grupa = angular.isDefined($scope.leagues.standings);
-    $scope.leagueGroupTeams = $scope.leagues.standings[0];
-    $scope.prvi = 0;
-
-    $scope.broj = function () {
-        return ( $scope.leagues.standings.length);
-    };
-
-    $scope.makeAClass = function (index) {
-        return ($scope.prvi === index) ? "btn btn-primary" : "btn btn-default";
-    };
-
-    $scope.changeGroup = function (index) {
-        $scope.leagueGroupTeams = $scope.leagues.standings[index]
-        $scope.prvi = index;
-    };
 });
 
-WebFootballAPI.controller("TeamController",function ($scope,tim){
+WebFootballAPI.controller("TeamsController",function ($scope,tim){
 
     $scope.teams = tim;
     $scope.orderBY = '';
@@ -72,6 +62,12 @@ WebFootballAPI.controller("TeamController",function ($scope,tim){
         }
         $scope.orderBY = name;
     };
+
+});
+
+WebFootballAPI.controller("TeamController",function ($scope,teamResolve){
+
+    $scope.team = teamResolve;
 
 });
 

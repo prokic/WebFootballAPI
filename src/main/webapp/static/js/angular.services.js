@@ -15,11 +15,27 @@ WebFootballAPI.service('LeagueService',function($http,$q){
     };
 });
 
-WebFootballAPI.service('TeamService',function($http,$q){
+WebFootballAPI.service('TeamsService',function($http,$q){
 
     this.getTeams = function (id){
         var deferred = $q.defer();
         return $http.get("api/teams/" + id)
+            .then(function (response) {
+                deferred.resolve(response.data);
+                return deferred.promise;
+            }, function (response) {
+                deferred.reject(response);
+                return deferred.promise;
+            });
+    };
+
+});
+
+WebFootballAPI.service('TeamService',function($http,$q){
+
+    this.getTeam = function (id){
+        var deferred = $q.defer();
+        return $http.get("api/team/" + id)
             .then(function (response) {
                 deferred.resolve(response.data);
                 return deferred.promise;
