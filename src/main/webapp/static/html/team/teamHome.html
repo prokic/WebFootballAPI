@@ -3,17 +3,41 @@
      left: 50%;
      -webkit-transform: translate(-50%, -50%);
      transform: translate(-50%, -50%)">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12" style="background-size: 30%">
+    <table height="200px" width="200px">
+         <tr>
+             <th colspan="2">
+                 <img src="{{team.crestUrl}}" height="100px" width="100px">
+             </th>
+         </tr>
+        <tr>
+            <th >
+                Team name
+            </th>
+            <th>
                 {{team.name}}
-            </div>
-            <div class="col-md-12">
-               {{team.shortName}}
-            </div>
-            <div class="col-md-12">
+            </th>
+        </tr>
+        <tr>
+            <th >
+                Short name
+            </th>
+            <th>
+                {{team.shortName}}
+            </th>
+        </tr>
+        <tr>
+            <th>
+                Squad value
+            </th>
+            <th>
                 {{team.squadMarketValue}}
-            </div>
-        </div>
-    </div>
+            </th>
+        </tr>
+        <tr>
+            <th colspan="2">
+                <a href="#/season/team/{{team._links.self.href}}/players">Players </a>
+            </th>
+        </tr>
+    </table>
+
 </div>

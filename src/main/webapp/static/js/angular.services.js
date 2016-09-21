@@ -73,3 +73,18 @@ WebFootballAPI.service('LeagueTableService',function($http,$q){
     };
 
 });
+
+WebFootballAPI.service('PlayersService',function ($http, $q) {
+
+    this.getPlayers = function (id) {
+        var deferred = $q.defer();
+        return $http.get("api/players/" + id)
+            .then(function (response) {
+                deferred.resolve(response.data);
+                return deferred.promise;
+            }, function (response) {
+                deferred.reject(response);
+                return deferred.promise;
+            });
+    }
+});

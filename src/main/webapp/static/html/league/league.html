@@ -12,7 +12,7 @@
     <tbody>
     <tr ng-repeat="league in leagues.standing | orderBy:'position'" style="background-color:mintcream ">
         <td>{{league.position}}</td>
-        <td><a href="#/season/{{league._links.team.href}}/teams">{{league.teamName}}</a></td>
+        <td><a href="#/season/{{league._links.team.href}}/team">{{league.teamName}}</a></td>
         <td>{{league.playedGames}}</td>
         <td>{{league.points}}</td>
         <td>{{league.goals}}</td>

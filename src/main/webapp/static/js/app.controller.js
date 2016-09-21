@@ -77,6 +77,11 @@ WebFootballAPI.controller("FixturesController",function ($scope){
 
 });
 
+WebFootballAPI.controller("PlayersController",function ($scope,playersResolve) {
+
+    $scope.playersRes = playersResolve;
+});
+
 WebFootballAPI.controller("LeagueTableController",function ($scope, $http,$window,$routeParams){
 
     $scope.initFixtures = function() {

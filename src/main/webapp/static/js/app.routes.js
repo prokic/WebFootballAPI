@@ -56,6 +56,15 @@ WebFootballAPI.config(['$routeProvider', function ($routeProvider,table) {
                 }
             }
         })
+        .when ('/season/team/:id/players',{
+            templateUrl : 'static/html/players/players.html',
+            controller : 'PlayersController',
+            resolve : {
+                "playersResolve" : function ($route, PlayersService) {
+                    return PlayersService.getPlayers($route.current.params.id);
+                }
+            }
+        })
         .when ('/error',{
             templateUrl : 'static/html/error/error.html',
             controller : "ErrorController"
