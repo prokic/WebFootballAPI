@@ -2,10 +2,47 @@ package project.football.web.dto.json.players;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.util.Date;
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PlayerDTO {
+
+
+     int Back(char charB){
+        if (charB == 'L'){
+            return 2;
+        }
+        else if (charB == 'C'){
+            return 3;
+        }
+        else {
+            return 4;
+        }
+
+    }
+     int Midfield (char charM){
+        if (charM == 'D'){
+            return 5;
+        }
+        else if (charM == 'C'){
+            return 6;
+        }
+        else {
+            return 7;
+        }
+    }
+    int Forward (char charF){
+        if (charF == 'L'){
+            return 8;
+        }
+        else if (charF == 'R'){
+            return 9;
+        }
+        else if (charF == 'S'){
+            return 10;
+        }
+        else {
+            return 11;
+        }
+    }
 
     private String name;
 
@@ -20,6 +57,8 @@ public class PlayerDTO {
     private String contractUntil;
 
     private String marketValue;
+
+    private int sortingByPosition;
 
     public String getName() {
         return name;
@@ -76,5 +115,33 @@ public class PlayerDTO {
 
     public void setMarketValue(String marketValue) {
         this.marketValue = marketValue;
+    }
+
+    public int getSortingByPosition() {
+
+        String positionString = this.position;
+        positionString = positionString.replace("-"," ");
+        int indexX = positionString.indexOf(" ");
+        System.out.println(positionString);
+        System.out.println(""+indexX);
+        char secondPartOfString = positionString.charAt(indexX+1);
+        System.out.println(""+positionString.charAt(0));
+
+        if (positionString.length() < 7){
+            return 1;
+        }
+        else if (secondPartOfString == 'B'){
+             return Back(positionString.charAt(0));
+        }
+        else if (secondPartOfString == 'M'){
+            return Midfield(positionString.charAt(0));
+        }else {
+            return Forward(positionString.charAt(0));
+        }
+
+    }
+
+    public void setSortingByPosition(int sortingByPosition) {
+        this.sortingByPosition = sortingByPosition;
     }
 }
