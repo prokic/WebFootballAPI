@@ -2,11 +2,22 @@ package project.football.web.dto.json.players;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.Calendar;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PlayerDTO {
 
 
-     int Back(char charB){
+    static {
+
+        Calendar now = Calendar.getInstance();
+        year = now.get(Calendar.YEAR);
+        month = now.get(Calendar.MONTH)+1;
+        day = now.get(Calendar.DAY_OF_MONTH);
+    }
+
+
+    int Back(char charB){
         if (charB == 'L'){
             return 2;
         }
@@ -18,7 +29,9 @@ public class PlayerDTO {
         }
 
     }
-     int Midfield (char charM){
+
+    int Midfield (char charM){
+
         if (charM == 'D'){
             return 5;
         }
@@ -29,6 +42,7 @@ public class PlayerDTO {
             return 7;
         }
     }
+
     int Forward (char charF){
         if (charF == 'L'){
             return 8;
@@ -43,6 +57,12 @@ public class PlayerDTO {
             return 11;
         }
     }
+
+    private static int year;
+
+    private static int month;
+
+    private static int day;
 
     private String name;
 
@@ -59,6 +79,8 @@ public class PlayerDTO {
     private String marketValue;
 
     private int sortingByPosition;
+
+    private int age;
 
     public String getName() {
         return name;
@@ -122,10 +144,7 @@ public class PlayerDTO {
         String positionString = this.position;
         positionString = positionString.replace("-"," ");
         int indexX = positionString.indexOf(" ");
-        System.out.println(positionString);
-        System.out.println(""+indexX);
         char secondPartOfString = positionString.charAt(indexX+1);
-        System.out.println(""+positionString.charAt(0));
 
         if (positionString.length() < 7){
             return 1;
@@ -143,5 +162,26 @@ public class PlayerDTO {
 
     public void setSortingByPosition(int sortingByPosition) {
         this.sortingByPosition = sortingByPosition;
+    }
+
+    public int getAge() {
+
+        int ageOfPlayer = year - (Integer.parseInt(this.dateOfBirth.substring(0,4)));
+        int monthOfPlayersBirth = Integer.parseInt(this.dateOfBirth.substring(5,7));
+        int dayOfPlayersBirth = Integer.parseInt(this.dateOfBirth.substring(8,10));
+
+        if (month > monthOfPlayersBirth){
+            return ageOfPlayer;
+        }
+        else if(month == monthOfPlayersBirth && day >= dayOfPlayersBirth) {
+            return ageOfPlayer;
+        }else {
+            return (--ageOfPlayer);
+        }
+
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }

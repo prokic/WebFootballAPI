@@ -11,7 +11,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="player in playersRes.players | orderBy:'jerseyNumber'" style="background-color:mintcream ">
+    <tr ng-repeat="player in playersRes.players | orderBy:'sortingByPosition'" style="background-color:mintcream ">
         <td>{{player.name}}</td>
         <td>{{player.position}}</td>
         <td>{{player.jerseyNumber}}</td>
