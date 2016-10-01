@@ -47,22 +47,12 @@ WebFootballAPI.service('TeamService',function($http,$q){
 
 });
 
-WebFootballAPI.service('LeagueTableService',function($http,$q){
+WebFootballAPI.service('LeagueTableService',function($http,$q,TableResolve){
 
     this.getLeagueTable = function (id){
         var deferred = $q.defer();
-        return $http.get("api/leaguetable/" + id)
-            .then(function (response) {
-                deferred.resolve(response.data);
-                return deferred.promise;
-            }, function (response) {
-                deferred.reject(response);
-                return deferred.promise;
-            });
-    };
-    this.getLeagueTableGroup = function (id){
-        var deferred = $q.defer();
-        return $http.get("api/leaguetable/group/" + id)
+        var getTable = TableResolve.get() ? "api/leaguetable/group/" : "api/leaguetable/" ;
+        return $http.get(getTable +id)
             .then(function (response) {
                 deferred.resolve(response.data);
                 return deferred.promise;

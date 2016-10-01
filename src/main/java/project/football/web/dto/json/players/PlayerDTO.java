@@ -1,68 +1,18 @@
 package project.football.web.dto.json.players;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import java.util.Calendar;
+import org.joda.time.LocalDate;
+import org.joda.time.Years;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PlayerDTO {
 
 
     static {
-
-        Calendar now = Calendar.getInstance();
-        year = now.get(Calendar.YEAR);
-        month = now.get(Calendar.MONTH)+1;
-        day = now.get(Calendar.DAY_OF_MONTH);
+        localDate = new LocalDate();
     }
 
-
-    int Back(char charB){
-        if (charB == 'L'){
-            return 2;
-        }
-        else if (charB == 'C'){
-            return 3;
-        }
-        else {
-            return 4;
-        }
-
-    }
-
-    int Midfield (char charM){
-
-        if (charM == 'D'){
-            return 5;
-        }
-        else if (charM == 'C'){
-            return 6;
-        }
-        else {
-            return 7;
-        }
-    }
-
-    int Forward (char charF){
-        if (charF == 'L'){
-            return 8;
-        }
-        else if (charF == 'R'){
-            return 9;
-        }
-        else if (charF == 'S'){
-            return 10;
-        }
-        else {
-            return 11;
-        }
-    }
-
-    private static int year;
-
-    private static int month;
-
-    private static int day;
+    private static LocalDate localDate;
 
     private String name;
 
@@ -141,23 +91,34 @@ public class PlayerDTO {
 
     public int getSortingByPosition() {
 
-        String positionString = this.position;
-        positionString = positionString.replace("-"," ");
-        int indexX = positionString.indexOf(" ");
-        char secondPartOfString = positionString.charAt(indexX+1);
+        int sort;
 
-        if (positionString.length() < 7){
-            return 1;
-        }
-        else if (secondPartOfString == 'B'){
-             return Back(positionString.charAt(0));
-        }
-        else if (secondPartOfString == 'M'){
-            return Midfield(positionString.charAt(0));
-        }else {
-            return Forward(positionString.charAt(0));
+        switch (this.position){
+            case "Keeper" : sort = 1;
+                break;
+            case "Centre Back" : sort = 2;
+                break;
+            case "Left-Back" : sort = 3;
+                break;
+            case "Right-Back" : sort = 4;
+                break;
+            case "Defensive Midfield" : sort = 5;
+                break;
+            case "Central Midfield" : sort = 6;
+                break;
+            case "Attacking Midfield" : sort = 7;
+                break;
+            case "Left Wing" : sort = 8;
+                break;
+            case "Right Wing" : sort = 9;
+                break;
+            case "Secondary Striker" : sort = 10;
+                break;
+            default : sort = 11;
+                break;
         }
 
+        return sort;
     }
 
     public void setSortingByPosition(int sortingByPosition) {
@@ -166,18 +127,8 @@ public class PlayerDTO {
 
     public int getAge() {
 
-        int ageOfPlayer = year - (Integer.parseInt(this.dateOfBirth.substring(0,4)));
-        int monthOfPlayersBirth = Integer.parseInt(this.dateOfBirth.substring(5,7));
-        int dayOfPlayersBirth = Integer.parseInt(this.dateOfBirth.substring(8,10));
-
-        if (month > monthOfPlayersBirth){
-            return ageOfPlayer;
-        }
-        else if(month == monthOfPlayersBirth && day >= dayOfPlayersBirth) {
-            return ageOfPlayer;
-        }else {
-            return (--ageOfPlayer);
-        }
+        LocalDate localDateFromDateOfBirth = new LocalDate(this.dateOfBirth);
+        return Years.yearsBetween(localDateFromDateOfBirth,localDate).getYears();
 
     }
 

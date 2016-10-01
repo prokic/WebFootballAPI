@@ -46,13 +46,8 @@ WebFootballAPI.config(['$routeProvider', function ($routeProvider,table) {
             '<div ng-if="!(grupa)"><league-table></league-table></div>',
             controller: 'TableController',
             resolve : {
-                "table" : function($route,LeagueTableService,TableResolve){
-                    if (TableResolve.get()){
-                        return LeagueTableService.getLeagueTableGroup($route.current.params.id);
-                    }
-                    else {
-                        return LeagueTableService.getLeagueTable($route.current.params.id);
-                    }
+                "table" : function($route,LeagueTableService){
+                    return LeagueTableService.getLeagueTable($route.current.params.id);
                 }
             }
         })
