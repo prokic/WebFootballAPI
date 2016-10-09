@@ -38,7 +38,7 @@ public class PlayerDTO {
 
     public void setName(String name) {
         int indeX = name.indexOf('\n');
-        this.name = name.substring(0,indeX);
+        this.name = indeX == -1 ? name : name.substring(0,indeX);
     }
 
     public String getPosition() {

@@ -15,6 +15,20 @@ WebFootballAPI.controller("FootballController", function ($scope) {
         $scope.year = $scope.godina.substring(0,4);
     };
 
+    $scope.inputFields = {
+        searchBy: ''
+    };
+
+    $scope.operators = [{
+        displayName: 'Age'
+    }, {
+        displayName: 'Market Value'
+    }, {
+        displayName: 'Name'
+    }, {
+        displayName: 'Position'
+    }];
+
 });
 
 WebFootballAPI.controller("LeagueController", function($scope,liga,TableResolve){
@@ -80,6 +94,14 @@ WebFootballAPI.controller("FixturesController",function ($scope){
 WebFootballAPI.controller("PlayersController",function ($scope,playersResolve) {
 
     $scope.playersRes = playersResolve;
+    $scope.dataA = {
+        availableOptions: [
+            {id: '1', name: 'Age'},
+            {id: '2', name: 'Jersey number'},
+            {id: '3', name: 'Market value'}
+        ],
+        selectedOption: { id: '3', name: 'Market value'}
+    };
 });
 
 WebFootballAPI.controller("LeagueTableController",function ($scope, $http,$window,$routeParams){

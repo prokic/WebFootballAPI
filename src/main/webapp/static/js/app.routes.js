@@ -42,8 +42,7 @@ WebFootballAPI.config(['$routeProvider', function ($routeProvider,table) {
             }
         })
         .when('/season/:id/leaguetable',{
-            template: '<div ng-if="grupa"><league-table-group></league-table-group></div>' +
-            '<div ng-if="!(grupa)"><league-table></league-table></div>',
+            template: '<league-table-group></league-table-group>',
             controller: 'TableController',
             resolve : {
                 "table" : function($route,LeagueTableService){
