@@ -1,13 +1,49 @@
 <div style="font-size: larger">
     <form name="myForm">
-        <label for="mySelect">Search by:</label>
-        <select name="mySelect" id="mySelect"
-                ng-options="option.name for option in dataA.availableOptions track by option.id"
-                ng-model="dataA.selectedOption"></select>
-        <span ng-if="dataA.selectedOption.id == 1"><input type="number" ng-minlength="0">Age</span>
-        <span ng-if="dataA.selectedOption.id == 2"><input type="text">Market Value</span>
-        <span ng-if="dataA.selectedOption.id == 3"><input type="password">Market value</span>
-        <span>{{data.indexOf(dataA.selectedOption)}}</span>
+        <span>Search by: </span>
+        <select ng-model="inputFields.searchBy"
+                ng-change="changeSearchBy()">
+            <option ng-selected="{{operator.displayName == inputFields.searchBy}}"
+                    ng-repeat="operatorRepeat in operators" value="{{operatorRepeat.searchField}}">
+                {{operatorRepeat.displayName}}
+            </option>
+        </select>
+        <span ng-if="inputFields.searchBy == 'age' || inputFields.searchBy == 'value'">
+    <select ng-model="inputFields.inputF.equal" equal-selected required>
+    <option>Equal</option>
+    <option>More/less</option>
+    </select>
+            <span class="form-group" ng-if="inputFields.inputF.equal != undefined"
+                  ng-class="{ 'has-error' : myForm.inputFieldName.$invalid && !myForm.inputFieldName.$pristine }">
+                <input type="number" name="inputFieldName" ng-model="inputFields.inputF.firstField" min="{{minValue}}"
+                       max="{{maxValue}}" required>
+                <span style="color: red" ng-show="myForm.inputFieldName.$error.min">Min value is {{minValue}}</span>
+                <span style="color: red" ng-show="myForm.inputFieldName.$error.max">Max value is {{maxValue}}</span>
+            </span>
+            <span class="form-group" ng-if="inputFields.inputF.equal"
+                  ng-class="{ 'has-error' : myForm.inputSecondField.$invalid && !myForm.inputSecondField.$pristine }">
+                - <input type="number" name="inputSecondField" ng-model="inputFields.inputF.secondField"
+                         min="{{inputFields.inputF.firstField + 1}}"
+                         max="{{maxValue}}" required>
+                <span style="color: red" ng-show="myForm.inputSecondField.$error.min">Min value is {{inputFields.inputF.firstField + 1}}</span>
+                <span style="color: red" ng-show="myForm.inputSecondField.$error.max">Max value is {{maxValue}}</span>
+            </span>
+            </span>
+        <span class="form-group" ng-if="inputFields.searchBy == 'name'"
+              ng-class="{ 'has-error' : myForm.inputFieldName.$invalid && !myForm.inputFieldName.$pristine }">
+                <input type="text" name="inputFieldName" ng-model="inputFields.inputF.firstField" required>
+            </span>
+        <span class="form-group" ng-if="inputFields.searchBy == 'sortingByPosition'"
+              ng-class="{ 'has-error' : myForm.inputFieldName.$invalid && !myForm.inputFieldName.$pristine }">
+                <select name="inputFieldName" ng-model="inputFields.inputF.firstField" required>
+                <option ng-repeat="positionDisplayName in position" value="{{$index+1}}">
+                    {{positionDisplayName}}
+                </option>
+                </select>
+            </span>
+        <span>
+                <button ng-show="inputFields.searchBy != ''" type="button" ng-click="inputFields.inputF.equal ? searchFields() : searchField()" ng-disabled="myForm.$invalid">Search</button>
+            </span>
     </form>
 </div>
 <table class="table table-bordered">

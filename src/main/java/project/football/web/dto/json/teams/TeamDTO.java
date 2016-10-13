@@ -2,6 +2,7 @@ package project.football.web.dto.json.teams;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.util.StringUtils;
 import project.football.web.dto.json.link.LinkIDSelfDTO;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -43,12 +44,12 @@ public class TeamDTO {
 
     public void setSquadMarketValue(String squadMarketValue) {
 
-        if (squadMarketValue != null){
-            this.squadMarketValue = squadMarketValue;
-        }
-        else {
-            this.squadMarketValue = "No market value";
-        }
+       if (StringUtils.isEmpty(squadMarketValue)){
+           this.squadMarketValue = "No market value";
+       }
+       else {
+           this.squadMarketValue = squadMarketValue;
+       }
     }
 
     public String getShortName() {
@@ -68,7 +69,7 @@ public class TeamDTO {
     }
 
     public int getValue() {
-        if (this.squadMarketValue != null){
+        if (this.squadMarketValue != "No market value"){
             String pomocna = this.squadMarketValue;
             String str = pomocna.replaceAll(",", "").trim();
             int index = str.indexOf(" ");

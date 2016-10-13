@@ -3,6 +3,7 @@ package project.football.web.dto.json.players;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
+import org.springframework.util.StringUtils;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PlayerDTO {
@@ -31,6 +32,8 @@ public class PlayerDTO {
     private int sortingByPosition;
 
     private int age;
+
+    private int value;
 
     public String getName() {
         return name;
@@ -86,7 +89,12 @@ public class PlayerDTO {
     }
 
     public void setMarketValue(String marketValue) {
-        this.marketValue = marketValue;
+        if (StringUtils.isEmpty(marketValue)){
+            this.marketValue = "No market value";
+        }
+        else {
+            this.marketValue = marketValue;
+        }
     }
 
     public int getSortingByPosition() {
@@ -134,5 +142,21 @@ public class PlayerDTO {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public int getValue() {
+        if (this.marketValue != "No market value"){
+            String pomocna = this.marketValue;
+            String str = pomocna.replaceAll(",", "").trim();
+            int index = str.indexOf(" ");
+            return Integer.parseInt(str.substring(0,index));
+        }
+        else {
+            return 0;
+        }
+    }
+
+    public void setValue(int value) {
+        this.value = value;
     }
 }

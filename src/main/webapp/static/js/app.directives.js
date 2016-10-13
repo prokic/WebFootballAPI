@@ -28,67 +28,19 @@ WebFootballAPI.directive('leagueTableGroup',function(){
     }
 });
 
-WebFootballAPI.directive('inputNumberAge', function(){
+WebFootballAPI.directive('equalSelected', function(){
     return{
         require:'ngModel',
         link: function(scope, elem, attrs, ctrl){
+
             ctrl.$parsers.unshift(function (viewValue) {
 
-                if (isNaN(parseInt(viewValue))){
-                    return undefined;
-                }
-                var getNumber = parseInt(viewValue);
-                if (getNumber >= 15 && getNumber <= 50 ) {
-                    ctrl.$setValidity('inputNumberAge',true);
-                    return viewValue;
+                if (viewValue !== 'Equal') {
+                    return true;
                 } else {
-                    ctrl.$setValidity('inputNumberAge', false);
-                    return undefined;
-                }
-            });
-        }
-    };
-
-});
-
-WebFootballAPI.directive('inputNumberMarketValue', function(){
-    return{
-        require:'ngModel',
-        link: function(scope, elem, attrs, ctrl){
-            ctrl.$parsers.unshift(function (viewValue) {
-
-                if (isNaN(parseInt(viewValue)) || (viewValue.indexOf("-") !== -1) ){
-                    ctrl.$setValidity('inputNumberMarketValue', false);
-                    return undefined;
-                }
-                var getNumber = parseInt(viewValue);
-                if (getNumber >= 0 ) {
-                    ctrl.$setValidity('inputNumberMarketValue',true);
-                    return viewValue;
-                } else {
-                    ctrl.$setValidity('inputNumberMarketValue', false);
-                    return undefined;
+                    return false;
                 }
             });
         }
     };
 });
-
-WebFootballAPI.directive('inputNameValue', function(){
-    return{
-        require:'ngModel',
-        link: function(scope, elem, attrs, ctrl){
-            ctrl.$parsers.unshift(function (viewValue) {
-
-                if (viewValue != "") {
-                    ctrl.$setValidity('inputNumberAge',true);
-                    return viewValue;
-                } else {
-                    ctrl.$setValidity('inputNumberAge', false);
-                    return undefined;
-                }
-            });
-        }
-    };
-});
-
