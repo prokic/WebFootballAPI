@@ -1,0 +1,51 @@
+<div ng-hide="finishMessage">
+    Loading
+</div>
+
+<div ng-init="initIni()" >
+    <div ng-if="finishMessage">
+        <table class="table table-bordered" >
+            <thead>
+            <th coolsap="12">
+                <tr>Finished Fixtures</tr>
+            </th>
+            </thead>
+            <tr style="background-color:mintcream " ng-repeat="fixture in finishedFixtures">
+                <td ng-class="fixture.result.goalsHomeTeam > fixture.result.goalsAwayTeam ? 'bold' : ''">
+                    {{fixture.homeTeamName}}
+                </td>
+                <td class="bold">{{fixture.result.goalsHomeTeam}} : {{fixture.result.goalsAwayTeam}}</td>
+                <td ng-class="fixture.result.goalsHomeTeam < fixture.result.goalsAwayTeam ? 'bold' : ''">
+                    {{fixture.awayTeamName}}
+                </td>
+            </tr>
+        </table>
+        </br>
+        <div ng-if="timedFixtures != undefined">
+        <table class="table table-bordered" ng-if="timedFixtures != undefined">
+            <tr>
+                <tr>Timed Fixtures</tr>
+            </tr>
+            <tr style="background-color:mintcream " ng-repeat="fixture in timedFixtures">
+                <td>{{fixture.homeTeamName}}</td>
+                <td>Date : {{fixture.date | date:'yyyy-MM-dd'}} Time : {{fixture.date | date:'HH:mm:ss'}}</td>
+                <td>{{fixture.awayTeamName}}</td>
+            </tr>
+        </table>
+        </div>
+        </br>
+        <table class="table table-bordered" ng-if="sheduledFixtures">
+            <thead>
+            <th>
+                <tr>Sheduled Fixtures</tr>
+            </th>
+            </thead>
+            <tr style="background-color:mintcream " ng-repeat="fixture in sheduledFixtures">
+                <td>{{fixture.homeTeamName}}</td>
+                <td>Date : {{fixture.date | date:'yyyy-MM-dd'}}</td>
+                <td>{{fixture.awayTeamName}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div><button type="button" ng-click="ss()">dsdadsadsa</button> </div>

@@ -1,4 +1,4 @@
-WebFootballAPI = angular.module('WebFootballAPI.directives', [])
+WebFootballAPI = angular.module('WebFootballAPI.directives', []);
 
 WebFootballAPI.directive('leagueTableGroup',function(){
     return {

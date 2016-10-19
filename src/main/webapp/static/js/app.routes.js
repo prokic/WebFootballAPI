@@ -19,8 +19,8 @@ WebFootballAPI.config(['$routeProvider', function ($routeProvider,table) {
                 }
             }
         })
-        .when ('/:id/fixtures',{
-               templateUrl: 'static/html/season/league/fixtures/homeFixtures.html',
+        .when ('/:id/fixture',{
+               templateUrl: 'static/html/season/league/fixture/homeFixtures.html',
                controller : 'FootballController'
         })
         .when ('/season/:id/teams',{
@@ -59,6 +59,15 @@ WebFootballAPI.config(['$routeProvider', function ($routeProvider,table) {
                 }
             }
         })
+        .when ('/season/team/:id/fixtures',{
+            templateUrl : 'static/html/team/fixture/fixture.html',
+            controller : 'TeamFixtureController',
+            resolve : {
+                "playersFixtureResolve" : function ($route, FixtureService) {
+                    return FixtureService.getTeamFixtures($route.current.params.id);
+                }
+            }
+        })
         .when ('/error',{
             templateUrl : 'static/html/error/error.html',
             controller : "ErrorController"
@@ -72,15 +81,15 @@ WebFootballAPI.config(['$routeProvider', function ($routeProvider,table) {
     $rootScope.$on("$locationChangeSuccess", function (event,next,current) {
 
     });
+    $rootScope.$on("$locationChangeError", function (event,next,current) {
+         var s = "";
+    });
     $rootScope.$on("$routeChangeStart", function (current,next) {
         var s = "dsdsadasd";
     });
     $rootScope.$on("$routeChangeSuccess",function(){
 
     });
-    $rootScope.$on("$routeChangeError", function (current,next){
-    });
-
     $rootScope.$on("$routeChangeError",function(event,next,current,rejection){
         ChangingURL.set(rejection.config.url);
         $location.path('/error');

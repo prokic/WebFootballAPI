@@ -10,3 +10,6 @@ th,td{
     background-color: #efefef;
     text-align: center;
 }
+.bold {
+    font-weight: bold;
+}

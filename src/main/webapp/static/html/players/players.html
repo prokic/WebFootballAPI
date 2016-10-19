@@ -42,7 +42,9 @@
                 </select>
             </span>
         <span>
-                <button ng-show="inputFields.searchBy != ''" type="button" ng-click="inputFields.inputF.equal ? searchFields() : searchField()" ng-disabled="myForm.$invalid">Search</button>
+                <button ng-show="inputFields.searchBy != ''" type="button"
+                        ng-click="inputFields.inputF.equal ? searchFields() : searchField()"
+                        ng-disabled="myForm.$invalid">Search</button>
             </span>
     </form>
 </div>

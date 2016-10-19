@@ -31,3 +31,18 @@ WebFootballAPI.factory('TableResolve', function() {
     }
 
 });
+
+WebFootballAPI.factory('setYearFactory', function() {
+    var compare;
+    function set(data) {
+        compare = data;
+    }
+    function get() {
+        return compare;
+    }
+
+    return {
+        set: set,
+        get: get
+    }
+});

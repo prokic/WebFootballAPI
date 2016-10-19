@@ -6,7 +6,7 @@ WebFootballAPI.controller("ErrorController", function ($scope, ChangingURL) {
 
 });
 
-WebFootballAPI.controller("FootballController", function ($scope) {
+WebFootballAPI.controller("FootballController", function ($scope, setYearFactory) {
 
     $scope.godina = "2015/2016";
     $scope.year = "2015";
@@ -14,11 +14,15 @@ WebFootballAPI.controller("FootballController", function ($scope) {
     $scope.changeYear = function () {
         $scope.year = $scope.godina.substring(0, 4);
     };
+    $scope.setYear = function () {
+        setYearFactory.set($scope.year);
+    }
 });
 
-WebFootballAPI.controller("LeagueController", function ($scope, liga, TableResolve) {
+WebFootballAPI.controller("LeagueController", function ($scope, liga, TableResolve, setYearFactory) {
 
     $scope.leagues = liga;
+    $scope.godina = setYearFactory.get();
 
     $scope.groupLeague = function (league) {
         var group = league.league;
@@ -70,9 +74,45 @@ WebFootballAPI.controller("TeamController", function ($scope, teamResolve) {
 
 });
 
-WebFootballAPI.controller("FixturesController", function ($scope) {
+WebFootballAPI.controller("TeamFixtureController", function ($scope, playersFixtureResolve) {
 
-    $scope.fixtures = data;
+    $scope.initIni = function () {
+        var listRes = playersFixtureResolve.fixtures;
+        $scope.finishedFixtures = [];
+        $scope.timedFixtures = [];
+        $scope.scheduledFixtures = [];
+        $scope.competitions = listRes.length != 0 ? listRes[0] : undefined;
+
+        if ($scope.competitions != undefined){
+            for (var i = 0; i < listRes.length; i++) {
+                var oneObject = listRes[i];
+                if (oneObject.status == 'FINISHED') {
+                    $scope.finishedFixtures.push(oneObject);
+                }
+                else if (oneObject.status == 'TIMED') {
+                    $scope.timedFixtures.push(oneObject);
+                }
+                else if (oneObject.status == 'SCHEDULED') {
+                    $scope.scheduledFixtures.push(oneObject);
+                }
+            }
+            if ($scope.finishedFixtures.length == 0) {
+                $scope.finishedFixtures == undefined;
+            }
+            if ($scope.timedFixtures.length == 0) {
+                $scope.timedFixtures == undefined;
+            }
+            if ($scope.scheduledFixtures.length == 0) {
+                $scope.scheduledFixtures == undefined;
+            }
+        }
+        $scope.finishMessage = true;
+    };
+    $scope.ss = function () {
+        var e = $scope.finishedFixtures;
+        var s = $scope.timedFixtures;
+        var eeer = $scope.sheduledFixtures;
+    }
 
 });
 
@@ -145,9 +185,21 @@ WebFootballAPI.controller("PlayersController", function ($scope, playersResolve)
     };
 
     $scope.searchFields = function () {
-        var searchByVar = "." + $scope.inputFields.searchBy;
+        var searchByVar = $scope.inputFields.searchBy;
         var firstField = $scope.inputFields.inputF.firstField;
         var secondField = $scope.inputFields.inputF.secondField;
+        var objectInArray;
+        var fieldInObject;
+        var list = [];
+
+        for (var i = 0; i < $scope.playersRes.players.length; i++) {
+            objectInArray = $scope.playersRes.players[i];
+            fieldInObject = objectInArray[searchByVar];
+            if (firstField <= fieldInObject && fieldInObject <= secondField) {
+                list.push(objectInArray);
+            }
+        }
+        $scope.playersRes.players = list;
     };
 
 });

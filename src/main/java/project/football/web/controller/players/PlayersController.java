@@ -14,7 +14,7 @@ import project.football.web.dto.json.players.PlayersDTO;
 
 
 @RestController
-@RequestMapping("api/players")
+@RequestMapping("api/team/players")
 public class PlayersController {
 
 
