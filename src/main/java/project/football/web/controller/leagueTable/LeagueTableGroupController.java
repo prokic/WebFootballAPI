@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.util.ReflectionUtils;
 import org.springframework.http.*;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import project.football.value.XAuthToken;
@@ -24,15 +21,14 @@ import java.util.List;
 @RequestMapping("api/leaguetable/group")
 public class LeagueTableGroupController {
 
-    public static final String Url_1st_Part = "http://api.football-data.org/v1/competitions/";
-    public static final String Url_2nd_Part = "/leagueTable";
+    private static final String Url_1st_Part = "http://api.football-data.org/v1/competitions/";
+    private static final String Url_2nd_Part = "/leagueTable";
 
     @Autowired
     private XAuthToken xAuthToken;
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     public ResponseEntity<LeagueTablesDTO> getTable (@PathVariable int id ){
-
 
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();

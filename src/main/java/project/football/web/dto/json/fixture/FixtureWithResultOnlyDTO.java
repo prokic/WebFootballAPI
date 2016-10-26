@@ -10,6 +10,12 @@ import java.util.Date;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FixtureWithResultOnlyDTO {
 
+    static{
+        timeZone = DateTimeZone.forID("Europe/Belgrade");
+    }
+
+    private static DateTimeZone timeZone;
+
     @JsonProperty(value = "_links")
     private LinkSelfDTO linkSelfDTO;
 
@@ -40,7 +46,6 @@ public class FixtureWithResultOnlyDTO {
 
     public void setDate(String dateString) {
 
-        DateTimeZone timeZone = DateTimeZone.forID("Europe/Belgrade");
         DateTime dateTime = new DateTime( dateString, timeZone );
         this.date = dateTime.toDate();
     }

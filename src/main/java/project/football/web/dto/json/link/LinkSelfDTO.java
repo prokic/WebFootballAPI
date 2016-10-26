@@ -5,24 +5,24 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class LinkSelfDTO {
 
     @JsonProperty(value = "self")
-    private LinkDTO linkDTO;
+    private LinksIDDTO linksIDDTOself;
 
     @JsonProperty(value = "competition")
-    private LinksIDDTO linksIDDTO;
+    private LinksIDDTO linksIDDTOCompetiton;
 
-    public LinkDTO getLinkDTO() {
-        return linkDTO;
+    public LinksIDDTO getLinksIDDTOself() {
+        return linksIDDTOself;
     }
 
-    public void setLinkDTO(LinkDTO linkDTO) {
-        this.linkDTO = linkDTO;
+    public void setLinksIDDTOself(LinksIDDTO linksIDDTOself) {
+        this.linksIDDTOself = linksIDDTOself;
     }
 
-    public LinksIDDTO getLinksIDDTO() {
-        return linksIDDTO;
+    public LinksIDDTO getLinksIDDTOCompetiton() {
+        return linksIDDTOCompetiton;
     }
 
-    public void setLinksIDDTO(LinksIDDTO linksIDDTO) {
-        this.linksIDDTO = linksIDDTO;
+    public void setLinksIDDTOCompetiton(LinksIDDTO linksIDDTOCompetiton) {
+        this.linksIDDTOCompetiton = linksIDDTOCompetiton;
     }
 }

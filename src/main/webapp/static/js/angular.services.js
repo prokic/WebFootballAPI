@@ -47,6 +47,15 @@ WebFootballAPI.service('TeamService', function ($http, $q) {
 
 });
 
+WebFootballAPI.service('CompetitionsService', function ($http) {
+
+    this.getNameOfCompetition = function (id) {
+        var setHeader = {};
+        setHeader['competition'] = true;
+        return $http.get("api/leaguetable/" + id, {params: setHeader});
+    }
+});
+
 WebFootballAPI.service('LeagueTableService', function ($http, $q, TableResolve) {
 
     this.getLeagueTable = function (id) {
@@ -85,7 +94,7 @@ WebFootballAPI.service('FixtureService', function ($http, $q, setYearFactory) {
         var setHeader = {};
         setHeader['year'] = setYearFactory.get().toString();
         var deferred = $q.defer();
-        return $http.get("api/team/fixtures/" + id,{ params : setHeader })
+        return $http.get("api/team/fixtures/" + id, {params: setHeader})
             .then(function (response) {
                 deferred.resolve(response.data);
                 return deferred.promise;

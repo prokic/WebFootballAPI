@@ -74,16 +74,21 @@ WebFootballAPI.controller("TeamController", function ($scope, teamResolve) {
 
 });
 
-WebFootballAPI.controller("TeamFixtureController", function ($scope, playersFixtureResolve) {
+WebFootballAPI.controller("TeamFixtureController", function ($scope, playersFixtureResolve, $timeout, CompetitionsService) {
+
+    $scope.competitions = function () {
+
+    };
 
     $scope.initIni = function () {
         var listRes = playersFixtureResolve.fixtures;
-        $scope.finishedFixtures = [];
-        $scope.timedFixtures = [];
-        $scope.scheduledFixtures = [];
-        $scope.competitions = listRes.length != 0 ? listRes[0] : undefined;
-
-        if ($scope.competitions != undefined){
+        $scope.lengthOfFixtures = listRes.length != 0;
+        var map = {};
+        if ($scope.lengthOfFixtures) {
+            $scope.finishedFixtures = [];
+            $scope.timedFixtures = [];
+            $scope.scheduledFixtures = [];
+            map[listRes[0]._links.competition.href] = listRes[0]._links.competition.href;
             for (var i = 0; i < listRes.length; i++) {
                 var oneObject = listRes[i];
                 if (oneObject.status == 'FINISHED') {
@@ -95,32 +100,44 @@ WebFootballAPI.controller("TeamFixtureController", function ($scope, playersFixt
                 else if (oneObject.status == 'SCHEDULED') {
                     $scope.scheduledFixtures.push(oneObject);
                 }
+                if (!(oneObject._links.competition.href in map)) {
+                    map[oneObject._links.competition.href] = oneObject._links.competition.href;
+                }
             }
-            if ($scope.finishedFixtures.length == 0) {
-                $scope.finishedFixtures == undefined;
-            }
-            if ($scope.timedFixtures.length == 0) {
-                $scope.timedFixtures == undefined;
-            }
-            if ($scope.scheduledFixtures.length == 0) {
-                $scope.scheduledFixtures == undefined;
-            }
+
+            var arrayOfObjectsIFromMap = Object.keys(map);
+            var indexForLoop = -1;
+            var listOfCompetitions = [];
+            var myLoop = function () {
+                $timeout(function () {
+                    indexForLoop++;
+                    if (indexForLoop < arrayOfObjectsIFromMap.length) {
+                        CompetitionsService.getNameOfCompetition(arrayOfObjectsIFromMap[indexForLoop])
+                            .success(function (response) {
+                                var res = response;
+                                res['id'] = arrayOfObjectsIFromMap[indexForLoop];
+                                listOfCompetitions.push(res);
+                                myLoop();
+                            })
+                            .error(function () {
+
+                            });
+                    }
+                    else {
+                        $scope.finishMessage = true;
+                    }
+                }, 10000);
+            };
+            myLoop();
         }
-        $scope.finishMessage = true;
+        else {
+        }
+        // $scope.finishMessage = true;
     };
-    $scope.ss = function () {
-        var e = $scope.finishedFixtures;
-        var s = $scope.timedFixtures;
-        var eeer = $scope.sheduledFixtures;
-    }
 
 });
 
 WebFootballAPI.controller("PlayersController", function ($scope, playersResolve) {
-
-    $scope.setAll = function () {
-        $scope.playersRes = playersResolve;
-    };
 
     $scope.playersRes = playersResolve;
 
@@ -143,6 +160,10 @@ WebFootballAPI.controller("PlayersController", function ($scope, playersResolve)
         displayName: 'Position',
         searchField: 'sortingByPosition'
     }];
+
+    $scope.setAll = function () {
+        $scope.playersRes = playersResolve;
+    };
 
     $scope.changeSearchBy = function () {
         if ($scope.inputFields.searchBy.charAt(0) == 'a') {
