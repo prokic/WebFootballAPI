@@ -23,20 +23,24 @@
         <table class="table table-bordered" ng-if="indexOfSelectedFixtures == 0">
             </thead>
             <tr style="background-color:mintcream " ng-repeat="oneFixture in fixture">
-                <td ng-class="oneFixture.result.goalsHomeTeam > oneFixture.result.goalsAwayTeam ? 'bold' : ''">
+                <td ng-class="{ 'bold' : oneFixture.result.goalsHomeTeam > oneFixture.result.goalsAwayTeam ||
+                   oneFixture.result.extraTime.goalsHomeTeam > oneFixture.result.extraTime.goalsAwayTeam ||
+                   oneFixture.result.penaltyShootout.goalsHomeTeam > oneFixture.result.penaltyShootout.goalsAwayTeam }">
                     {{oneFixture.homeTeamName}}
                 </td>
                 <td>
                     <div>
-                        <span> ({{oneFixture.result.goalsHomeTeam}} : {{oneFixture.result.goalsAwayTeam}}) on '90 minutes  </span>
+                        <span> ({{oneFixture.result.goalsHomeTeam}} : {{oneFixture.result.goalsAwayTeam}}) in '90 minutes  </span>
                         <span ng-if="oneFixture.result.extraTime != null"> - ({{oneFixture.result.extraTime.goalsHomeTeam}} :
-                        {{oneFixture.result.extraTime.goalsAwayTeam}}) on ET </span>
+                        {{oneFixture.result.extraTime.goalsAwayTeam}}) ET </span>
                         <span ng-if="oneFixture.result.penaltyShootout != null"> - ({{oneFixture.result.penaltyShootout.goalsHomeTeam}} :
-                        {{oneFixture.result.penaltyShootout.goalsAwayTeam}}) on PK </span>
+                        {{oneFixture.result.penaltyShootout.goalsAwayTeam}}) PK </span>
                         <span style="border: solid #2a6496"> Date : {{oneFixture.date | date:'dd MMMM yyyy'}}</span>
                     </div>
                 </td>
-                <td ng-class="oneFixture.result.goalsHomeTeam < oneFixture.result.goalsAwayTeam ? 'bold' : ''">
+                <td ng-class="{ 'bold' : oneFixture.result.goalsHomeTeam < oneFixture.result.goalsAwayTeam ||
+                   oneFixture.result.extraTime.goalsHomeTeam < oneFixture.result.extraTime.goalsAwayTeam ||
+                   oneFixture.result.penaltyShootout.goalsHomeTeam < oneFixture.result.penaltyShootout.goalsAwayTeam }">
                     {{oneFixture.awayTeamName}}
                 </td>
             </tr>
