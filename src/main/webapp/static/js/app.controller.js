@@ -76,15 +76,49 @@ WebFootballAPI.controller("TeamController", function ($scope, teamResolve) {
 
 WebFootballAPI.controller("TeamFixtureController", function ($scope, playersFixtureResolve, $timeout, CompetitionsService) {
 
-    $scope.competitions = function () {
+    $scope.showingFixtures = function (arrayOfFixtures,indexX) {
 
+        $scope.indexOfSelectedFixtures = parseInt(indexX);
+
+        if ($scope.listOfCompetitions.length == 1){
+            $scope.fixtures = [];
+            $scope.fixtures ['0'] = arrayOfFixtures;
+        }
+        else if ($scope.listOfCompetitions.length == 2){
+            var idOfCompetition = $scope.listOfCompetitions[0].id;
+            $scope.fixtures = [];
+            $scope.fixtures['0'] = [];
+            $scope.fixtures['1'] = [];
+            for (var i = 0; i < arrayOfFixtures.length ; i++){
+                var selectedobject = arrayOfFixtures[i];
+                selectedobject._links.competition.href == idOfCompetition ? $scope.fixtures['0'].push(selectedobject) : $scope.fixtures['1'].push(selectedobject);
+            }
+
+        }
+        else {
+            $scope.fixtures = [];
+            for (var j = 0; j < $scope.listOfCompetitions.length; j++){
+                $scope.fixtures[j] = [];
+            }
+            for (var i = 0; i < arrayOfFixtures.length ; i++){
+                var selectedobjectFor = arrayOfFixtures[i];
+                for (var z = 0; z < $scope.listOfCompetitions.length; z++){
+                    if (selectedobjectFor._links.competition.href == $scope.listOfCompetitions[z].id){
+                       $scope.fixtures[z].push(selectedobjectFor);
+                        break;
+                    }
+                }
+            }
+        }
+
+        $scope.finishMessage = true;
     };
 
     $scope.initIni = function () {
         var listRes = playersFixtureResolve.fixtures;
         $scope.lengthOfFixtures = listRes.length != 0;
-        var map = {};
         if ($scope.lengthOfFixtures) {
+            var map = {};
             $scope.finishedFixtures = [];
             $scope.timedFixtures = [];
             $scope.scheduledFixtures = [];
@@ -107,7 +141,7 @@ WebFootballAPI.controller("TeamFixtureController", function ($scope, playersFixt
 
             var arrayOfObjectsIFromMap = Object.keys(map);
             var indexForLoop = -1;
-            var listOfCompetitions = [];
+            $scope.listOfCompetitions = [];
             var myLoop = function () {
                 $timeout(function () {
                     indexForLoop++;
@@ -116,23 +150,33 @@ WebFootballAPI.controller("TeamFixtureController", function ($scope, playersFixt
                             .success(function (response) {
                                 var res = response;
                                 res['id'] = arrayOfObjectsIFromMap[indexForLoop];
-                                listOfCompetitions.push(res);
+                                $scope.listOfCompetitions.push(res);
                                 myLoop();
                             })
                             .error(function () {
-
+                                $scope.finishMessage = true;
+                                $scope.errorMessage = "Something went wrong";
                             });
                     }
                     else {
-                        $scope.finishMessage = true;
+                        if ($scope.finishedFixtures.length != 0){
+                            $scope.showingFixtures($scope.finishedFixtures,0);
+                        }
+                        else if ($scope.timedFixtures.length != 0){
+                            $scope.showingFixtures($scope.timedFixtures,1);
+                        }
+                        else {
+                            $scope.showingFixtures($scope.scheduledFixtures,2);
+                        }
                     }
-                }, 10000);
+                }, 2000);
             };
             myLoop();
         }
         else {
+            $scope.finishMessage = true;
+            $scope.errorMessage = "This team is not updated with fixtures";
         }
-        // $scope.finishMessage = true;
     };
 
 });

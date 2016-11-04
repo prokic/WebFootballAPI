@@ -1,48 +1,58 @@
-<div class="loader" ng-hide="finishMessage">
-</div>
+<div ng-init="initIni()" class="loader" ng-hide="finishMessage"></div>
 
-<div ng-init="initIni()" >
-    <div ng-if="finishMessage">
-        <table class="table table-bordered" >
-            <thead>
-            <th coolsap="12">
-                <tr>Finished Fixtures</tr>
-            </th>
+<div ng-if="finishMessage">
+    <ul class="list-inline">
+        <li class="list-inline-item" ng-if="finishedFixtures.length != 0">
+            <button type="button" ng-class="indexOfSelectedFixtures == 0 ? 'btn btn-primary' : 'btn btn-default'"
+                    ng-click="showingFixtures(finishedFixtures,0)">Finished Fixtures
+            </button>
+        </li>
+        <li class="list-inline-item" ng-if="timedFixtures.length != 0">
+            <button type="button" ng-class="indexOfSelectedFixtures == 1 ? 'btn btn-primary' : 'btn btn-default'"
+                    ng-click="showingFixtures(timedFixtures,1)">Timed Fixtures
+            </button>
+        </li>
+        <li class="list-inline-item" ng-if="scheduledFixtures.length != 0">
+            <button type="button" ng-class="indexOfSelectedFixtures == 2 ? 'btn btn-primary' : 'btn btn-default'"
+                    ng-click="showingFixtures(scheduledFixtures,2)">Scheduled Fixtures
+            </button>
+        </li>
+    </ul>
+    <div ng-repeat="fixture in fixtures">
+        <strong ng-if="fixture.length != 0">{{listOfCompetitions[$index].caption}}</strong>
+        <table class="table table-bordered" ng-if="indexOfSelectedFixtures == 0">
             </thead>
-            <tr style="background-color:mintcream " ng-repeat="fixture in finishedFixtures">
-                <td ng-class="fixture.result.goalsHomeTeam > fixture.result.goalsAwayTeam ? 'bold' : ''">
-                    {{fixture.homeTeamName}}
+            <tr style="background-color:mintcream " ng-repeat="oneFixture in fixture">
+                <td ng-class="oneFixture.result.goalsHomeTeam > oneFixture.result.goalsAwayTeam ? 'bold' : ''">
+                    {{oneFixture.homeTeamName}}
                 </td>
-                <td class="bold">{{fixture.result.goalsHomeTeam}} : {{fixture.result.goalsAwayTeam}}</td>
-                <td ng-class="fixture.result.goalsHomeTeam < fixture.result.goalsAwayTeam ? 'bold' : ''">
-                    {{fixture.awayTeamName}}
+                <td>
+                    <div>
+                        <span> ({{oneFixture.result.goalsHomeTeam}} : {{oneFixture.result.goalsAwayTeam}}) on '90 minutes  </span>
+                        <span ng-if="oneFixture.result.extraTime != null"> - ({{oneFixture.result.extraTime.goalsHomeTeam}} :
+                        {{oneFixture.result.extraTime.goalsAwayTeam}}) on ET </span>
+                        <span ng-if="oneFixture.result.penaltyShootout != null"> - ({{oneFixture.result.penaltyShootout.goalsHomeTeam}} :
+                        {{oneFixture.result.penaltyShootout.goalsAwayTeam}}) on PK </span>
+                        <span style="border: solid #2a6496"> Date : {{oneFixture.date | date:'dd MMMM yyyy'}}</span>
+                    </div>
+                </td>
+                <td ng-class="oneFixture.result.goalsHomeTeam < oneFixture.result.goalsAwayTeam ? 'bold' : ''">
+                    {{oneFixture.awayTeamName}}
                 </td>
             </tr>
         </table>
-        </br>
-        <div ng-if="timedFixtures != undefined">
-        <table class="table table-bordered" ng-if="timedFixtures != undefined">
-            <tr>
-                <tr>Timed Fixtures</tr>
-            </tr>
-            <tr style="background-color:mintcream " ng-repeat="fixture in timedFixtures">
-                <td>{{fixture.homeTeamName}}</td>
-                <td>Date : {{fixture.date | date:'yyyy-MM-dd'}} Time : {{fixture.date | date:'HH:mm:ss'}}</td>
-                <td>{{fixture.awayTeamName}}</td>
+        <table class="table table-bordered" ng-if="indexOfSelectedFixtures == 1">
+            <tr style="background-color:mintcream " ng-repeat="oneFixture in fixture">
+                <td>{{oneFixture.homeTeamName}}</td>
+                <td>Date : {{oneFixture.date | date:'dd MMMM yyyy'}}, Time : {{oneFixture.date | date:'HH:mm:ss'}}</td>
+                <td>{{oneFixture.awayTeamName}}</td>
             </tr>
         </table>
-        </div>
-        </br>
-        <table class="table table-bordered" ng-if="sheduledFixtures">
-            <thead>
-            <th>
-                <tr>Sheduled Fixtures</tr>
-            </th>
-            </thead>
-            <tr style="background-color:mintcream " ng-repeat="fixture in sheduledFixtures">
-                <td>{{fixture.homeTeamName}}</td>
-                <td>Date : {{fixture.date | date:'yyyy-MM-dd'}}</td>
-                <td>{{fixture.awayTeamName}}</td>
+        <table class="table table-bordered" ng-if="indexOfSelectedFixtures == 2">
+            <tr style="background-color:mintcream " ng-repeat="oneFixture in fixture">
+                <td>{{oneFixture.homeTeamName}}</td>
+                <td>Date : {{oneFixture.date | date:'dd MMMM yyyy'}}</td>
+                <td>{{oneFixture.awayTeamName}}</td>
             </tr>
         </table>
     </div>

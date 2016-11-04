@@ -7,21 +7,12 @@ WebFootballAPI.directive('leagueTableGroup',function(){
         controller : function ($scope) {
 
             if ($scope.grupa){
-
                 $scope.leagueGroupTeams = $scope.leagues.standings[0];
-                $scope.prvi = 0;
-
-                $scope.broj = function () {
-                    return ( $scope.leagues.standings.length);
-                };
-
-                $scope.makeAClass = function (index) {
-                    return ($scope.prvi === index) ? "btn btn-primary" : "btn btn-default";
-                };
+                $scope.primaryClassIndex = 0;
 
                 $scope.changeGroup = function (index) {
                     $scope.leagueGroupTeams = $scope.leagues.standings[index];
-                    $scope.prvi = index;
+                    $scope.primaryClassIndex = index;
                 };
             }
         }
@@ -35,11 +26,7 @@ WebFootballAPI.directive('equalSelected', function(){
 
             ctrl.$parsers.unshift(function (viewValue) {
 
-                if (viewValue !== 'Equal') {
-                    return true;
-                } else {
-                    return false;
-                }
+                return viewValue !== 'Equal';
             });
         }
     };
