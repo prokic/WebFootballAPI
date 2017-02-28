@@ -50,6 +50,10 @@ WebFootballAPI.config(['$routeProvider', function ($routeProvider,table) {
                 }
             }
         })
+        .when('/season/:id/fixtures' ,{
+            template : 'static/html/',
+
+        })
         .when ('/season/team/:id/players',{
             templateUrl : 'static/html/players/players.html',
             controller : 'PlayersController',

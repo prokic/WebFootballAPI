@@ -184,6 +184,7 @@ WebFootballAPI.controller("TeamFixtureController", function ($scope, playersFixt
 WebFootballAPI.controller("PlayersController", function ($scope, playersResolve) {
 
     $scope.playersRes = playersResolve;
+    $scope.allPlayers = playersResolve.players;
 
     $scope.inputFields = {
         searchBy: ''
@@ -205,8 +206,9 @@ WebFootballAPI.controller("PlayersController", function ($scope, playersResolve)
         searchField: 'sortingByPosition'
     }];
 
-    $scope.setAll = function () {
-        $scope.playersRes = playersResolve;
+    $scope.backAll = function () {
+        $scope.playersRes.players = $scope.allPlayers;
+        this.changeSearchBy();
     };
 
     $scope.changeSearchBy = function () {
