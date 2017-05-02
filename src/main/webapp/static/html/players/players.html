@@ -2,40 +2,41 @@
     <form name="myForm">
         <span>Search by: </span>
         <select ng-model="inputFields.searchBy"
-                ng-change="changeSearchBy()">
+                ng-change="changeSearchBy()"
+                ng-disabled="showSearched">
             <option ng-selected="{{operator.displayName == inputFields.searchBy}}"
                     ng-repeat="operatorRepeat in operators" value="{{operatorRepeat.searchField}}">
                 {{operatorRepeat.displayName}}
             </option>
         </select>
         <span ng-if="inputFields.searchBy == 'age' || inputFields.searchBy == 'value'">
-    <select ng-model="inputFields.inputF.equal" equal-selected required>
+    <select ng-model="inputFields.inputF.equal" ng-disabled="showSearched" equal-selected required>
     <option>Equal</option>
     <option>More/less</option>
     </select>
             <span class="form-group" ng-if="inputFields.inputF.equal != undefined"
                   ng-class="{ 'has-error' : myForm.inputFieldName.$invalid && !myForm.inputFieldName.$pristine }">
                 <input type="number" name="inputFieldName" ng-model="inputFields.inputF.firstField" min="{{minValue}}"
-                       max="{{maxValue}}" required>
+                       max="{{maxValue}}" ng-disabled="showSearched" required>
                 <span style="color: red" ng-show="myForm.inputFieldName.$error.min">Min value is {{minValue}}</span>
                 <span style="color: red" ng-show="myForm.inputFieldName.$error.max">Max value is {{maxValue}}</span>
             </span>
             <span class="form-group" ng-if="inputFields.inputF.equal"
                   ng-class="{ 'has-error' : myForm.inputSecondField.$invalid && !myForm.inputSecondField.$pristine }">
-                - <input type="number" name="inputSecondField" ng-model="inputFields.inputF.secondField"
+                - <input type="number" name="inputSecondField" ng-model="inputFields.inputF.secondField" ng-disabled="showSearched"
                          min="{{inputFields.inputF.firstField + 1}}"
-                         max="{{maxValue}}" required>
+                         max="{{maxValue}}" ng-disabled="showSearched" required>
                 <span style="color: red" ng-show="myForm.inputSecondField.$error.min">Min value is {{inputFields.inputF.firstField + 1}}</span>
                 <span style="color: red" ng-show="myForm.inputSecondField.$error.max">Max value is {{maxValue}}</span>
             </span>
             </span>
         <span class="form-group" ng-if="inputFields.searchBy == 'name'"
               ng-class="{ 'has-error' : myForm.inputFieldName.$invalid && !myForm.inputFieldName.$pristine }">
-                <input type="text" name="inputFieldName" ng-model="inputFields.inputF.firstField" required>
+                <input type="text" name="inputFieldName" ng-model="inputFields.inputF.firstField" ng-disabled="showSearched" required>
             </span>
         <span class="form-group" ng-if="inputFields.searchBy == 'sortingByPosition'"
               ng-class="{ 'has-error' : myForm.inputFieldName.$invalid && !myForm.inputFieldName.$pristine }">
-                <select name="inputFieldName" ng-model="inputFields.inputF.firstField" required>
+                <select name="inputFieldName" ng-model="inputFields.inputF.firstField" ng-disabled="showSearched" required>
                 <option ng-repeat="positionDisplayName in position" value="{{$index+1}}">
                     {{positionDisplayName}}
                 </option>
@@ -45,7 +46,7 @@
                 <button ng-show="inputFields.searchBy != '' && !(showSearched)" type="button"
                         ng-click="inputFields.inputF.equal ? searchFields() : searchField();showSearched = true"
                         ng-disabled="myForm.$invalid">Search</button>
-            <button type="button" ng-click="backAll();showSearched = false" ng-show="showSearched">
+            <button type="button" ng-click="inputFields.searchBy = '';backAll();showSearched = false;" ng-show="showSearched">
                 Show All
             </button>
             </span>

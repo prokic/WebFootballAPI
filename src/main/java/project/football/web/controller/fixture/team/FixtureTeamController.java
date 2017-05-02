@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import project.football.value.XAuthToken;
-import project.football.web.dto.json.fixture.FixturesWithResultOnlyDTO;
+import project.football.web.dto.json.team.fixture.FixturesWithResultAndETandPKDTO;
 
 @RestController
 @RequestMapping("api/team/fixtures")
@@ -21,18 +21,18 @@ public class FixtureTeamController {
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<FixturesWithResultOnlyDTO> getTeam(@PathVariable String id,
-                                                             @RequestParam(value = "year") String year) {
+    public ResponseEntity<FixturesWithResultAndETandPKDTO> getTeam(@PathVariable String id,
+                                                                   @RequestParam(value = "year") String year) {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.add("X-Auth-Token", xAuthToken.getAuth());
         HttpEntity<String> entity = new HttpEntity<>(headers);
-        ParameterizedTypeReference<FixturesWithResultOnlyDTO> responseType = new ParameterizedTypeReference<FixturesWithResultOnlyDTO>() {
+        ParameterizedTypeReference<FixturesWithResultAndETandPKDTO> responseType = new ParameterizedTypeReference<FixturesWithResultAndETandPKDTO>() {
         };
 
         try {
-            ResponseEntity<FixturesWithResultOnlyDTO> restResult = restTemplate.exchange(Url_1st_Part + id + Url_2nd_Part + "?season=" + year, HttpMethod.GET, entity, responseType);
-            FixturesWithResultOnlyDTO ResultEntity = restResult.getBody();
+            ResponseEntity<FixturesWithResultAndETandPKDTO> restResult = restTemplate.exchange(Url_1st_Part + id + Url_2nd_Part + "?season=" + year, HttpMethod.GET, entity, responseType);
+            FixturesWithResultAndETandPKDTO ResultEntity = restResult.getBody();
 
             return new ResponseEntity(ResultEntity, HttpStatus.OK);
         } catch (HttpClientErrorException e) {

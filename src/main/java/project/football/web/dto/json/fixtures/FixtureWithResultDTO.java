@@ -1,4 +1,5 @@
-package project.football.web.dto.json.fixture;
+package project.football.web.dto.json.fixtures;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.joda.time.DateTime;
@@ -8,7 +9,7 @@ import project.football.web.dto.json.link.LinkSelfDTO;
 import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class FixtureWithResultOnlyDTO {
+public class FixtureWithResultDTO {
 
     static{
         timeZone = DateTimeZone.forID("Europe/Belgrade");
@@ -30,7 +31,7 @@ public class FixtureWithResultOnlyDTO {
     private String awayTeamName;
 
     @JsonProperty(value = "result")
-    private OnlyTheResultDTO onlyTheResultDTO;
+    private TheResultDTO theResultDTO;
 
     public LinkSelfDTO getLinkSelfDTO() {
         return linkSelfDTO;
@@ -40,7 +41,7 @@ public class FixtureWithResultOnlyDTO {
         this.linkSelfDTO = linkSelfDTO;
     }
 
-        public Date getDate() {
+    public Date getDate() {
         return date;
     }
 
@@ -82,11 +83,11 @@ public class FixtureWithResultOnlyDTO {
         this.awayTeamName = awayTeamName;
     }
 
-    public OnlyTheResultDTO getOnlyTheResultDTO() {
-        return onlyTheResultDTO;
+    public TheResultDTO getTheResultDTO() {
+        return theResultDTO;
     }
 
-    public void setOnlyTheResultDTO(OnlyTheResultDTO onlyTheResultDTO) {
-        this.onlyTheResultDTO = onlyTheResultDTO;
+    public void setTheResultDTO(TheResultDTO theResultDTO) {
+        this.theResultDTO = theResultDTO;
     }
 }

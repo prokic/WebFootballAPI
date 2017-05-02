@@ -24,27 +24,19 @@ WebFootballAPI.controller("LeagueController", function ($scope, liga, TableResol
     $scope.leagues = liga;
     $scope.godina = setYearFactory.get();
 
-    $scope.groupLeague = function (league) {
-        var group = league.league;
-        if (group == 'CL' || group == 'EL' || group == 'EC' || group == 'WC') {
-            TableResolve.set(true)
-        }
-        else {
-            TableResolve.set(false);
-        }
+    $scope.function = function (league) {
+        return !!(league == 'CL' || league == 'EL' || league == 'EC' || league == 'WC');
     };
-
 });
 
-WebFootballAPI.controller("TableController", function ($scope, table) {
+WebFootballAPI.controller("TableController", function ($scope, LeagueTableResolve) {
 
-    $scope.leagues = table;
-    $scope.grupa = angular.isDefined($scope.leagues.standings);
+    $scope.leagues = LeagueTableResolve;
 });
 
-WebFootballAPI.controller("TeamsController", function ($scope, tim) {
+WebFootballAPI.controller("TeamsController", function ($scope,teamsResolve) {
 
-    $scope.teams = tim;
+    $scope.teams = teamsResolve;
     $scope.orderBY = '';
     $scope.reverse = false;
     $scope.classArrow = "";

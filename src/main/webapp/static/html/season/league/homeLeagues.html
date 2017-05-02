@@ -22,9 +22,17 @@
                 <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">Options
                     <span class="caret"></span></button>
                 <ul class="dropdown-menu ">
-                    <li><a href="#/season/{{league.id}}/teams" ng-click='groupLeague(league)'>Teams</a></li>
-                    <li><a href="#/season/{{league.id}}/fixtures">Fixtures</a></li>
-                    <li ng-if="league.league != 'DFB' && league.league != 'FAC' && league.league != 'CDR' "><a href="#/season/{{league.id}}/leaguetable" ng-click='groupLeague(league)'>League table</a></li>
+                    <li><a href="#/season/{{league.id}}/teams">Teams</a></li>
+                    <li ng-if="!(league.league == 'CL' || league.league == 'EL' || league.league == 'EC' || league.league == 'WC')">
+                        <a ng-show="!(league.league == 'DFB' || league.league == 'FAC' || league.league == 'CDR')" href="#/league/{{league.id}}/fixtures" >Fixtures League</a>
+                        <a ng-show="league.league == 'DFB' || league.league == 'FAC' || league.league == 'CDR'" href="#/cup/{{league.id}}/fixtures">Fixtures Cup</a> 
+                    </li>
+                    <li ng-if="!(league.league == 'DFB' || league.league == 'FAC' || league.league == 'CDR') ">
+                        <a ng-href="{{function(league)}}">League table</a>
+                        <a ng-href="#/season/{{league.id}}/leaguetable?table={{function(league.league)}}">Test</a>
+                        <!--<a ng-if="league.league == 'CL' || league.league == 'EL' || league.league == 'EC' || league.league == 'WC'" href="#/season/{{league.id}}/leaguetable?table=true" ng-click='groupLeague(league)'>League table</a>-->
+                        <!--<a ng-if="!(league.league == 'CL' || league.league == 'EL' || league.league == 'EC' || league.league == 'WC')" href="#/season/{{league.id}}/leaguetable?table=false" ng-click='groupLeague(league)'>League table</a>-->
+                    </li>
                 </ul>
             </div>
         </td>

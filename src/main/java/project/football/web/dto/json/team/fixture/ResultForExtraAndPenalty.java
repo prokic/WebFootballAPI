@@ -1,9 +1,9 @@
-package project.football.web.dto.json.fixture;
+package project.football.web.dto.json.team.fixture;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ResultForExtraOrPenalty {
+public class ResultForExtraAndPenalty {
 
     private int goalsHomeTeam;
 

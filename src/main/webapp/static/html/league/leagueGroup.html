@@ -1,4 +1,4 @@
-<div>
+<div league-table-group>
     <span>Group: </span><button type="button" ng-class="primaryClassIndex === $index ? 'btn btn-primary' : 'btn btn-default'" ng-repeat="n in [] | range : leagues.standings.length" ng-click="changeGroup($index)">{{n}}</button>
 </div>
 <table class="table table-bordered">
@@ -13,8 +13,8 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="league in leagueGroupTeams | orderBy:'rank'" style="background-color:mintcream ">
-        <td>{{league.rank}}</td>
+    <tr ng-repeat="league in leagueGroupTeams | orderBy:['-points','-goalDifference']" style="background-color:mintcream ">
+        <td>{{$index + 1}}</td>
         <td><a href="#/season/{{league.teamId}}/team">{{league.team}}</a></td>
         <td>{{league.points}}</td>
         <td>{{league.goals}}</td>

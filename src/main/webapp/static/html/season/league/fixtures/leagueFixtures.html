@@ -1,0 +1,13 @@
+<table class="table table-bordered">
+    <tbody>
+    <tr ng-repeat="fixture in fixtures" style="background-color:mintcream ">
+        <td>{{fixture.homeTeamName}}</td>
+        <td>
+            <div>
+                <b> ({{fixture.result.goalsHomeTeam}} : {{fixture.result.goalsAwayTeam}}) </b>
+            </div>
+        </td>
+        <td>{{fixture.awayTeamName}}</td>
+    </tr>
+    </tbody>
+</table>

@@ -10,3 +10,12 @@ WebFootballAPI.filter('range', function() {
         return input;
     };
 });
+WebFootballAPI.filter('matchdaysList', function() {
+    return function(input, total) {
+        total = parseInt(total);
+        for (var i = 1; i < total; i++){
+            input.push(i);
+        }
+        return input;
+    };
+});

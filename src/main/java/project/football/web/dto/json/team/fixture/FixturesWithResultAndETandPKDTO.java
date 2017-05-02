@@ -1,22 +1,21 @@
-package project.football.web.dto.json.fixture;
+package project.football.web.dto.json.team.fixture;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import project.football.web.dto.json.link.LinkIDSelfDTO;
-import project.football.web.dto.json.link.LinksFixtureHrefDTO;
 
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class FixturesWithResultOnlyDTO {
+public class FixturesWithResultAndETandPKDTO {
 
     @JsonProperty(value = "_links")
     private LinkIDSelfDTO linkIDSelfDTO;
 
     private int count;
 
-    private List<FixtureWithResultOnlyDTO> fixtures;
+    private List<FixtureWithResultOnlyETandPKDTO> fixtures;
 
     public LinkIDSelfDTO getLinkIDSelfDTO() {
         return linkIDSelfDTO;
@@ -34,11 +33,11 @@ public class FixturesWithResultOnlyDTO {
         this.count = count;
     }
 
-    public List<FixtureWithResultOnlyDTO> getFixtures() {
+    public List<FixtureWithResultOnlyETandPKDTO> getFixtures() {
         return fixtures;
     }
 
-    public void setFixtures(List<FixtureWithResultOnlyDTO> fixtures) {
+    public void setFixtures(List<FixtureWithResultOnlyETandPKDTO> fixtures) {
         this.fixtures = fixtures;
     }
 }

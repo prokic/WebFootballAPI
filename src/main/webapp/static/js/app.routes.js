@@ -1,6 +1,6 @@
 WebFootballAPI = angular.module('WebFootballAPI.routes', ['ngRoute']);
 
-WebFootballAPI.config(['$routeProvider', function ($routeProvider,table) {
+WebFootballAPI.config(['$routeProvider','$locationProvider', function ($routeProvider,$locationProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'static/html/home.html',
@@ -10,24 +10,48 @@ WebFootballAPI.config(['$routeProvider', function ($routeProvider,table) {
             templateUrl : 'static/html/home.html',
             controller : 'FootballController'
         })
+        //ne cackati
         .when ('/footballSeason/:year', {
             templateUrl: 'static/html/season/league/homeLeagues.html',
             controller: 'LeagueController',
             resolve: {
-                "liga" : function($route,LeagueService){
+                "liga" : function($route,LeagueService) {
                     return LeagueService.getLeaguee($route.current.params.year);
                 }
+                // },
+                // "proba" : function($route,LeagueService){
+                //     var lista = [];
+                //     var p = "api/season/" + $route.current.params.year;
+                //     var l = "api/team/81" ;
+                //     lista.push(p,l);
+                //     // lista.push(l);
+                //     return LeagueService.novo(lista);
+                // }
             }
         })
-        .when ('/:id/fixture',{
-               templateUrl: 'static/html/season/league/fixture/homeFixtures.html',
-               controller : 'FootballController'
+        .when ('/league/:id/fixtures',{
+               controller : 'LeagueFixturesController',
+               templateUrl : 'static/html/season/league/fixtures/leagueFixtures.html',
+               resolve: {
+                   "LeagueFixturesResolve" : function ($route,LeagueFixtureService) {
+                       return LeagueFixtureService.getLeagueFixtures($route.current.params.id,1);
+                   }
+               }
+        })
+        .when ('/cup/:id/fixtures',{
+            controller : 'CupFixturesController',
+            templateUrl : 'static/html/season/league/fixtures/cupFixtures.html',
+            resolve: {
+                "CupFixturesResolve" : function ($route,LeagueFixtureService) {
+                    return LeagueFixtureService.getCupFixtures($route.current.params.id);
+                }
+            }
         })
         .when ('/season/:id/teams',{
             templateUrl: 'static/html/season/league/teams/homeTeams.html',
             controller : 'TeamsController',
             resolve : {
-                 "tim" : function($route,TeamsService){
+                 "teamsResolve" : function($route,TeamsService){
                      return TeamsService.getTeams($route.current.params.id);
                  }
             }
@@ -42,18 +66,23 @@ WebFootballAPI.config(['$routeProvider', function ($routeProvider,table) {
             }
         })
         .when('/season/:id/leaguetable',{
-            template: '<league-table-group></league-table-group>',
+            templateUrl : function ($location) {
+                return $location.table === "true" ? "static/html/league/leagueGroup.html" : "static/html/league/league.html";
+            },
             controller: 'TableController',
             resolve : {
-                "table" : function($route,LeagueTableService){
-                    return LeagueTableService.getLeagueTable($route.current.params.id);
+                "LeagueTableResolve" : function($route,LeagueTableService){
+                    var table = $route.current.params.table;
+                    return LeagueTableService.getLeagueTable($route.current.params.id,table);
                 }
             }
         })
+        //slobodno
         .when('/season/:id/fixtures' ,{
-            template : 'static/html/',
+            template : 'static/html/'
 
         })
+        //sve uradjeno
         .when ('/season/team/:id/players',{
             templateUrl : 'static/html/players/players.html',
             controller : 'PlayersController',
@@ -63,6 +92,7 @@ WebFootballAPI.config(['$routeProvider', function ($routeProvider,table) {
                 }
             }
         })
+        //sve uradjeno
         .when ('/season/team/:id/fixtures',{
             templateUrl : 'static/html/team/fixture/fixture.html',
             controller : 'TeamFixtureController',
@@ -72,6 +102,7 @@ WebFootballAPI.config(['$routeProvider', function ($routeProvider,table) {
                 }
             }
         })
+        //error page je gotov samo urediti stranicu
         .when ('/error',{
             templateUrl : 'static/html/error/error.html',
             controller : "ErrorController"
@@ -81,6 +112,8 @@ WebFootballAPI.config(['$routeProvider', function ($routeProvider,table) {
         });
 
 }]).run(function ($rootScope,$location,ChangingURL) {
+
+
 
     $rootScope.$on("$locationChangeSuccess", function (event,next,current) {
 
