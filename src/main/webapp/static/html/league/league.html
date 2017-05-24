@@ -1,4 +1,6 @@
-<table class="table table-bordered">
+<span><button class="button" type="button" ng-click="leagueFixtureBoolean = false" ng-class="leagueFixtureBoolean ? 'btn btn-default btn-sm' : 'btn btn-primary btn-sm'"> LeagueGroup</button></span>
+<span><button class="button" type="button" ng-click="leagueFixtureBoolean = true" ng-class="leagueFixtureBoolean ? 'btn btn-primary btn-sm' : 'btn btn-default btn-sm'"> Fixtures</button></span>
+<table class="table table-bordered" ng-show="!leagueFixtureBoolean">
     <thead>
     <tr style="background-color: darkgrey;">
         <th>Position</th>

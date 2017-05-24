@@ -74,6 +74,9 @@ WebFootballAPI.config(['$routeProvider','$locationProvider', function ($routePro
                 "LeagueTableResolve" : function($route,LeagueTableService){
                     var table = $route.current.params.table;
                     return LeagueTableService.getLeagueTable($route.current.params.id,table);
+                },
+                "fixturesResolve" : function ($route,LeagueFixtureService) {
+                    return LeagueFixtureService.getLeagueFixtures($route.current.params.id);
                 }
             }
         })

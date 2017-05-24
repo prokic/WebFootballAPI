@@ -18,14 +18,12 @@ public class LeagueFixtureController {
 
     private static final String Url_1st_Part = "http://api.football-data.org/v1/competitions/";
     private static final String Url_2nd_Part = "/fixtures";
-    private static final String Url_3rd_Part = "?matchday=";
 
     @Autowired
     private XAuthToken xAuthToken;
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    public ResponseEntity<FixturesWithResultDTO> getLeagueFixtures (@PathVariable int id,
-                                                                    @RequestParam (value = "matchday") int matchday){
+    public ResponseEntity<FixturesWithResultDTO> getLeagueFixtures (@PathVariable int id){
 
 
         RestTemplate restTemplate = new RestTemplate();
@@ -35,7 +33,7 @@ public class LeagueFixtureController {
         ParameterizedTypeReference<FixturesWithResultDTO> responseType = new ParameterizedTypeReference<FixturesWithResultDTO>() {};
 
         try {
-            ResponseEntity<FixturesWithResultDTO> restResult = restTemplate.exchange(Url_1st_Part + id + Url_2nd_Part+Url_3rd_Part+matchday, HttpMethod.GET, entity, responseType);
+            ResponseEntity<FixturesWithResultDTO> restResult = restTemplate.exchange(Url_1st_Part + id + Url_2nd_Part, HttpMethod.GET, entity, responseType);
             FixturesWithResultDTO ResultEntity = restResult.getBody();
 
             return new ResponseEntity(ResultEntity, HttpStatus.OK);

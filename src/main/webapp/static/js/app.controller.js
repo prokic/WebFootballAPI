@@ -32,6 +32,7 @@ WebFootballAPI.controller("LeagueController", function ($scope, liga, TableResol
 WebFootballAPI.controller("TableController", function ($scope, LeagueTableResolve) {
 
     $scope.leagues = LeagueTableResolve;
+    $scope.leagueFixtureBoolean = false;
 });
 
 WebFootballAPI.controller("TeamsController", function ($scope,teamsResolve) {
@@ -57,6 +58,7 @@ WebFootballAPI.controller("TeamsController", function ($scope,teamsResolve) {
         }
         $scope.orderBY = name;
     };
+
 
 });
 

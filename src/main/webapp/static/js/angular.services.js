@@ -165,38 +165,46 @@ WebFootballAPI.service('FixtureService', function ($http, $q, setYearFactory) {
 });
 
 
-WebFootballAPI.service('LeagueFixtureService', function ($http, $q) {
+WebFootballAPI.service('LeagueFixtureService', function ($http, $q,$timeout) {
 
-    // this.id;
-    // this.getLeagueFixtures = function (id,matchday) {
+    // this.getLeagueFixtures = function (id) {
     //     var deferred = $q.defer();
-    //     var request_params = {};
-    //     request_params['matchday'] = matchday;
-    //     return $http.get("api/league/fixtures/" + id,{ params : request_params })
+    //     return $http.get("api/league/fixtures/" + id)
     //         .then(function (response) {
     //             deferred.resolve(response.data);
     //             return deferred.promise;
     //         }, function (response) {
-    //             // this.id = id;
     //             deferred.reject(response);
     //             return deferred.promise;
     //         });
     //     //redovna league fixtures, sa matchdays
     // };
-    this.getLeagueFixtures = function (id, matchday) {
+
+
+    // this.getLeagueFixtures = function (id) {
+    //     var deferred = $q.defer();
+    //     return $http.get("api/league/fixtures/" + id)
+    //         .then(function (response) {
+    //             deferred.resolve(response.data);
+    //             return deferred.promise;
+    //         }, function (response) {
+    //             deferred.reject(response);
+    //             return deferred.promise;
+    //         });
+    //     //redovna league fixtures, sa matchdays
+    // };
+
+    this.getLeagueFixtures = function (id) {
         var deferred = $q.defer();
-        var request_params = {};
-        request_params['matchday'] = matchday;
-        return $http.get("api/league/fixtures/" + id, {params: request_params})
-            .then(function (response) {
-                $http.get()
-                deferred.resolve(response.data);
-                return deferred.promise;
-            }, function (response) {
-                // this.id = id;
-                deferred.reject(response);
-                return deferred.promise;
-            });
+        $timeout(function () {
+            $http.get("api/league/fixtures/" + id)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (response) {
+                    deferred.reject(response);
+                });
+        }, 2000);
+        return deferred.promise;
         //redovna league fixtures, sa matchdays
     };
 
