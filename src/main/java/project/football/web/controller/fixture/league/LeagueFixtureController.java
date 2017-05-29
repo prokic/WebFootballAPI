@@ -10,6 +10,7 @@ import project.football.value.XAuthToken;
 import project.football.web.dto.json.fixtures.FixturesWithResultDTO;
 import project.football.web.dto.json.team.fixture.FixturesWithResultAndETandPKDTO;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -23,7 +24,7 @@ public class LeagueFixtureController {
     private XAuthToken xAuthToken;
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    public ResponseEntity<FixturesWithResultDTO> getLeagueFixtures (@PathVariable int id){
+    public ResponseEntity<HashMap<Integer,List<FixturesWithResultDTO>>> getLeagueFixtures (@PathVariable int id){
 
 
         RestTemplate restTemplate = new RestTemplate();

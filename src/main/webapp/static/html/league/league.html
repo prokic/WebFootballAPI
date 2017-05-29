@@ -1,5 +1,7 @@
-<span><button class="button" type="button" ng-click="leagueFixtureBoolean = false" ng-class="leagueFixtureBoolean ? 'btn btn-default btn-sm' : 'btn btn-primary btn-sm'"> LeagueGroup</button></span>
-<span><button class="button" type="button" ng-click="leagueFixtureBoolean = true" ng-class="leagueFixtureBoolean ? 'btn btn-primary btn-sm' : 'btn btn-default btn-sm'"> Fixtures</button></span>
+<span><button class="button" type="button" ng-click="leagueFixtureBoolean = false"
+              ng-class="leagueFixtureBoolean ? 'btn btn-default btn-sm' : 'btn btn-primary btn-sm'"> LeagueGroup</button></span>
+<span><button class="button" type="button" ng-click="leagueFixtureBoolean = true"
+              ng-class="leagueFixtureBoolean ? 'btn btn-primary btn-sm' : 'btn btn-default btn-sm'"> Fixtures</button></span>
 <table class="table table-bordered" ng-show="!leagueFixtureBoolean">
     <thead>
     <tr style="background-color: darkgrey;">
@@ -9,12 +11,14 @@
         <th>W</th>
         <th>D</th>
         <th>L</th>
-        <th colspan="3"><div>Home</div>
+        <th colspan="3">
+            <div>Home</div>
             <span style="width: 20%;float: left">W</span>
             <span style="width: 40%;float: none">D</span>
             <span style="width: 20%;float: right">L</span>
         </th>
-        <th colspan="3"><div>Away</div>
+        <th colspan="3">
+            <div>Away</div>
             <span style="width: 20%;float: left">W</span>
             <span style="width: 40%;float: none">D</span>
             <span style="width: 20%;float: right">L</span>
@@ -27,7 +31,8 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="league in leagues.standing | orderBy:['-points','-goalDifference']" style="background-color:mintcream ">
+    <tr ng-repeat="league in leagues.standing | orderBy:['-points','-goalDifference']"
+        style="background-color:mintcream ">
         <td>{{$index +1 }}</td>
         <td><a href="#/season/{{league._links.team.href}}/team">{{league.teamName}}</a></td>
         <td>{{league.playedGames}}</td>
@@ -57,9 +62,18 @@
     </tbody>
     <tfoot style="border: none;border-collapse:separate">
     <tr style="border: none">
-        <td style="border: none">
-            nesto
-        </td>
+        <!--<td style="border: none">-->
+        <!--nesto-->
+        <!--</td>-->
     </tr>
     </tfoot>
 </table>
+<div ng-show="leagueFixtureBoolean">
+    <!--<div ng-repeat="fixturesWithMatchday in fixtures"> (key,value) in data-->
+    <div ng-repeat = "(key,fixturesWithMatchday) in fixtures track by $index">
+        {{key}}
+      <div ng-repeat = "fixture in fixturesWithMatchday">
+          {{fixture.matchday}}
+      </div>
+    </div>
+</div>

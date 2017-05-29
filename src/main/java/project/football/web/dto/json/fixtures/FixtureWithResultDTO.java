@@ -9,7 +9,7 @@ import project.football.web.dto.json.link.LinkSelfDTO;
 import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class FixtureWithResultDTO {
+public class FixtureWithResultDTO implements Comparable<FixtureWithResultDTO>{
 
     static{
         timeZone = DateTimeZone.forID("Europe/Belgrade");
@@ -89,5 +89,10 @@ public class FixtureWithResultDTO {
 
     public void setTheResultDTO(TheResultDTO theResultDTO) {
         this.theResultDTO = theResultDTO;
+    }
+
+    @Override
+    public int compareTo(FixtureWithResultDTO obj) {
+        return this.matchday - obj.getMatchday();
     }
 }

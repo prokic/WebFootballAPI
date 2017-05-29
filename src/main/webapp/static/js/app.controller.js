@@ -29,10 +29,20 @@ WebFootballAPI.controller("LeagueController", function ($scope, liga, TableResol
     };
 });
 
-WebFootballAPI.controller("TableController", function ($scope, LeagueTableResolve) {
+WebFootballAPI.controller("TableController", function ($scope, LeagueTableResolve,fixturesResolve) {
 
     $scope.leagues = LeagueTableResolve;
     $scope.leagueFixtureBoolean = false;
+    $scope.fixtures = fixturesResolve.fixtures;
+    $scope.p = "s";
+    // $scope.fix = $scope.fixtures[1];
+    // $scope.a = "sdsaas";
+    // $scope.funk = function (value) {
+    //     $scope.a = value;
+    // }
+    $scope.pozovi = function (value) {
+        $scope.a = value;
+    }
 });
 
 WebFootballAPI.controller("TeamsController", function ($scope,teamsResolve) {

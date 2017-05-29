@@ -2,20 +2,14 @@ package project.football.web.controller.leagueTable;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.data.util.ReflectionUtils;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import project.football.value.XAuthToken;
 import project.football.web.dto.json.LeagueTable.LeagueTablesDTO;
-import project.football.web.dto.json.leagueTableGroup.GroupS;
-import project.football.web.dto.json.leagueTableGroup.LeagueTableGroupDTO;
 import project.football.web.dto.json.leagueTableGroup.LeaguesTableGroupsDTO;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.List;
 
 @RestController
 @RequestMapping("api/leaguetable/group")

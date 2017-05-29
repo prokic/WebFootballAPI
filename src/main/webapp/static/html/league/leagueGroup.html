@@ -1,7 +1,12 @@
-<span><button class="button" type="button" ng-click="leagueFixtureBoolean = false" ng-class="leagueFixtureBoolean ? 'btn btn-default btn-sm' : 'btn btn-primary btn-sm'"> LeagueGroup</button></span>
-<span><button class="button" type="button" ng-click="leagueFixtureBoolean = true" ng-class="leagueFixtureBoolean ? 'btn btn-primary btn-sm' : 'btn btn-default btn-sm'"> Fixtures</button></span>
+<span><button class="button" type="button" ng-click="leagueFixtureBoolean = false"
+              ng-class="leagueFixtureBoolean ? 'btn btn-default btn-sm' : 'btn btn-primary btn-sm'"> LeagueGroup</button></span>
+<span><button class="button" type="button" ng-click="leagueFixtureBoolean = true"
+              ng-class="leagueFixtureBoolean ? 'btn btn-primary btn-sm' : 'btn btn-default btn-sm'"> Fixtures</button></span>
 <div league-table-group>
-    <span>Group: </span><button type="button" ng-class="primaryClassIndex === $index ? 'btn btn-primary' : 'btn btn-default'" ng-repeat="n in [] | range : leagues.standings.length" ng-click="changeGroup($index)">{{n}}</button>
+    <span>Group: </span>
+    <button type="button" ng-class="primaryClassIndex === $index ? 'btn btn-primary' : 'btn btn-default'"
+            ng-repeat="n in [] | range : leagues.standings.length" ng-click="changeGroup($index)">{{n}}
+    </button>
 </div>
 <table class="table table-bordered" ng-show="!leagueFixtureBoolean">
     <thead>
@@ -15,7 +20,8 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="league in leagueGroupTeams | orderBy:['-points','-goalDifference']" style="background-color:mintcream ">
+    <tr ng-repeat="league in leagueGroupTeams | orderBy:['-points','-goalDifference']"
+        style="background-color:mintcream ">
         <td>{{$index + 1}}</td>
         <td><a href="#/season/{{league.teamId}}/team">{{league.team}}</a></td>
         <td>{{league.points}}</td>
@@ -25,3 +31,15 @@
     </tr>
     </tbody>
 </table>
+<!--<div ng-repeat="matchday in fixturesResolve | orderBy:'matchday'">-->
+<!--<div ng-show="leagueFixtureBoolean">-->
+    <!--<div ng-repeat="matchdayFixture in fixtures">-->
+    <!--<div ng-repeat="fix in matchdayFixture">-->
+    <!--{{fix.homeTeamName}}-->
+    <!--&lt;!&ndash;</div>&ndash;&gt; <div>ispisi ovo </div>-->
+    <!--</div>-->
+    <!--<div ng-model="vrednost" ng-init="vrednost = fixture.1">  -->
+    <!--<div ng-init="pozovi()">-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--</div>-->
+<!--</div>-->
