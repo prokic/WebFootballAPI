@@ -34,14 +34,11 @@ WebFootballAPI.controller("TableController", function ($scope, LeagueTableResolv
     $scope.leagues = LeagueTableResolve;
     $scope.leagueFixtureBoolean = false;
     $scope.fixtures = fixturesResolve.fixtures;
-    $scope.p = "s";
-    // $scope.fix = $scope.fixtures[1];
-    // $scope.a = "sdsaas";
-    // $scope.funk = function (value) {
-    //     $scope.a = value;
-    // }
-    $scope.pozovi = function (value) {
-        $scope.a = value;
+    $scope.keys = Object.keys($scope.fixtures);
+    $scope.selectedMatchday = $scope.keys[0];
+    // $scope.keys.length > 0 ? $scope.selectedMatchday = $scope.keys[0] : "";
+    $scope.changeMatchday = function (value) {
+        $scope.selectedMatchday = value;
     }
 });
 

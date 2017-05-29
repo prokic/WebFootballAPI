@@ -19,3 +19,11 @@ WebFootballAPI.filter('matchdaysList', function() {
         return input;
     };
 });
+WebFootballAPI.filter('listOfMatchdays', function() {
+    return function(input, keysFromObject) {
+        for (var i = 0; i < keysFromObject.length; i++){
+            input.push(keysFromObject[i]);
+        }
+        return input;
+    };
+});

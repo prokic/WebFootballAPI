@@ -69,11 +69,13 @@
     </tfoot>
 </table>
 <div ng-show="leagueFixtureBoolean">
-    <!--<div ng-repeat="fixturesWithMatchday in fixtures"> (key,value) in data-->
-    <div ng-repeat = "(key,fixturesWithMatchday) in fixtures track by $index">
+        <select ng-model="selectedMatchday">
+            <option ng-repeat="matchdays in [] | listOfMatchdays : keys" >{{matchdays}}</option>
+        </select>
+    <div ng-repeat="(key,fixturesWithMatchday) in fixtures">
         {{key}}
-      <div ng-repeat = "fixture in fixturesWithMatchday">
-          {{fixture.matchday}}
-      </div>
+        <div ng-repeat="fixture in fixturesWithMatchday" ng-show="key === selectedMatchday">
+            {{fixture.homeTeamName}} {{fixture.awayTeamName}}
+        </div>
     </div>
 </div>
