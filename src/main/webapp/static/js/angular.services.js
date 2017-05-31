@@ -165,34 +165,7 @@ WebFootballAPI.service('FixtureService', function ($http, $q, setYearFactory) {
 });
 
 
-WebFootballAPI.service('LeagueFixtureService', function ($http, $q,$timeout) {
-
-    // this.getLeagueFixtures = function (id) {
-    //     var deferred = $q.defer();
-    //     return $http.get("api/league/fixtures/" + id)
-    //         .then(function (response) {
-    //             deferred.resolve(response.data);
-    //             return deferred.promise;
-    //         }, function (response) {
-    //             deferred.reject(response);
-    //             return deferred.promise;
-    //         });
-    //     //redovna league fixtures, sa matchdays
-    // };
-
-
-    // this.getLeagueFixtures = function (id) {
-    //     var deferred = $q.defer();
-    //     return $http.get("api/league/fixtures/" + id)
-    //         .then(function (response) {
-    //             deferred.resolve(response.data);
-    //             return deferred.promise;
-    //         }, function (response) {
-    //             deferred.reject(response);
-    //             return deferred.promise;
-    //         });
-    //     //redovna league fixtures, sa matchdays
-    // };
+WebFootballAPI.service('LeagueFixtureService', function ($http, $q, $timeout) {
 
     this.getLeagueFixtures = function (id) {
         var deferred = $q.defer();
@@ -210,14 +183,15 @@ WebFootballAPI.service('LeagueFixtureService', function ($http, $q,$timeout) {
 
     this.getCupFixtures = function (id) {
         var deferred = $q.defer();
-        return $http.get("api/league/teamFixture" + id)
-            .then(function (response) {
-                deferred.resolve(response.data);
-                return deferred.promise;
-            }, function (response) {
-                deferred.reject(response);
-                return deferred.promise;
-            });
+        $timeout(function () {
+            $http.get("api/cup/fixtures/" + id)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (response) {
+                    deferred.reject(response);
+                });
+        }, 2000);
+        return deferred.promise;
         //fixtures samo sa matchdays. Uraditi for sa matchdays pa to da je button i izracunati koliko ima do kraja za final,semi-final....
     };
     this.getWorldCupFixtures = function (id) {

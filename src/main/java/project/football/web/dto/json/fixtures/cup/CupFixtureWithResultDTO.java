@@ -1,15 +1,18 @@
-package project.football.web.dto.json.team.fixture;
+package project.football.web.dto.json.fixtures.cup;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
-import project.football.web.dto.json.link.LinkSelfDTO;
+import project.football.web.dto.json.link.LinkFixtureWithIdHomeAndAwayDTO;
+import project.football.web.dto.json.team.fixture.TheResultETandPKDTO;
 
+import java.util.Comparator;
 import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class FixtureWithResultOnlyETandPKDTO {
+public class CupFixtureWithResultDTO implements Comparable<CupFixtureWithResultDTO>{
 
     static {
         timeZone = DateTimeZone.forID("Europe/Belgrade");
@@ -18,7 +21,7 @@ public class FixtureWithResultOnlyETandPKDTO {
     private static DateTimeZone timeZone;
 
     @JsonProperty(value = "_links")
-    private LinkSelfDTO linkSelfDTO;
+    private LinkFixtureWithIdHomeAndAwayDTO LinkFixtureWithIdHomeAndAwayDTO;
 
     private Date date;
 
@@ -33,12 +36,12 @@ public class FixtureWithResultOnlyETandPKDTO {
     @JsonProperty(value = "result")
     private TheResultETandPKDTO onlyTheResultDTO;
 
-    public LinkSelfDTO getLinkSelfDTO() {
-        return linkSelfDTO;
+    public LinkFixtureWithIdHomeAndAwayDTO getLinkFixtureWithIdHomeAndAwayDTO() {
+        return LinkFixtureWithIdHomeAndAwayDTO;
     }
 
-    public void setLinkSelfDTO(LinkSelfDTO linkSelfDTO) {
-        this.linkSelfDTO = linkSelfDTO;
+    public void setLinkFixtureWithIdHomeAndAwayDTO(LinkFixtureWithIdHomeAndAwayDTO linkFixtureWithIdHomeAndAwayDTO) {
+        LinkFixtureWithIdHomeAndAwayDTO = linkFixtureWithIdHomeAndAwayDTO;
     }
 
     public Date getDate() {
@@ -89,5 +92,19 @@ public class FixtureWithResultOnlyETandPKDTO {
 
     public void setOnlyTheResultDTO(TheResultETandPKDTO onlyTheResultDTO) {
         this.onlyTheResultDTO = onlyTheResultDTO;
+    }
+
+    @Override
+    public int compareTo(CupFixtureWithResultDTO obj) {
+        return this.matchday - obj.getMatchday();
+    }
+
+    static class FixtureDateComparator implements Comparator<CupFixtureWithResultDTO>
+    {
+
+        public int compare(CupFixtureWithResultDTO FirstFixture, CupFixtureWithResultDTO SecondFixture)
+        {
+            return FirstFixture.getDate().compareTo(SecondFixture.getDate());
+        }
     }
 }

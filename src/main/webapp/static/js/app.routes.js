@@ -18,15 +18,6 @@ WebFootballAPI.config(['$routeProvider','$locationProvider', function ($routePro
                 "liga" : function($route,LeagueService) {
                     return LeagueService.getLeaguee($route.current.params.year);
                 }
-                // },
-                // "proba" : function($route,LeagueService){
-                //     var lista = [];
-                //     var p = "api/season/" + $route.current.params.year;
-                //     var l = "api/team/81" ;
-                //     lista.push(p,l);
-                //     // lista.push(l);
-                //     return LeagueService.novo(lista);
-                // }
             }
         })
         .when ('/league/:id/fixtures',{
@@ -38,12 +29,15 @@ WebFootballAPI.config(['$routeProvider','$locationProvider', function ($routePro
                    }
                }
         })
-        .when ('/cup/:id/fixtures',{
-            controller : 'CupFixturesController',
+        .when ('/season/cup/:id/fixtures',{
             templateUrl : 'static/html/season/league/fixtures/cupFixtures.html',
+            controller : 'CupFixturesController',
             resolve: {
                 "CupFixturesResolve" : function ($route,LeagueFixtureService) {
                     return LeagueFixtureService.getCupFixtures($route.current.params.id);
+                },
+                "teamsResolve" : function($route,TeamsService){
+                    return TeamsService.getTeams($route.current.params.id);
                 }
             }
         })

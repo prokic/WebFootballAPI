@@ -42,6 +42,20 @@ WebFootballAPI.controller("TableController", function ($scope, LeagueTableResolv
     }
 });
 
+WebFootballAPI.controller("CupFixturesController",function ($scope,CupFixturesResolve,teamsResolve) {
+
+    $scope.teams = teamsResolve;
+    $scope.leagueFixtureBoolean = false;
+    $scope.fixtures = CupFixturesResolve.fixtures;
+    $scope.keys = Object.keys($scope.fixtures);
+    $scope.ds = $scope.fixtures[1];
+    $scope.a = $scope.ds[1];
+    $scope.pozovi = function (value) {
+      return value[1];
+    };
+
+});
+
 WebFootballAPI.controller("TeamsController", function ($scope,teamsResolve) {
 
     $scope.teams = teamsResolve;

@@ -25,7 +25,7 @@
                     <li><a href="#/season/{{league.id}}/teams">Teams</a></li>
                     <li ng-if="!(league.league == 'CL' || league.league == 'EL' || league.league == 'EC' || league.league == 'WC')">
                         <a ng-show="!(league.league == 'DFB' || league.league == 'FAC' || league.league == 'CDR')" href="#/league/{{league.id}}/fixtures" >Fixtures League</a>
-                        <a ng-show="league.league == 'DFB' || league.league == 'FAC' || league.league == 'CDR'" href="#/cup/{{league.id}}/fixtures">Fixtures Cup</a> 
+                        <a ng-show="league.league == 'DFB' || league.league == 'FAC' || league.league == 'CDR'" href="#/season/cup/{{league.id}}/fixtures">Fixtures Cup</a>
                     </li>
                     <li ng-if="!(league.league == 'DFB' || league.league == 'FAC' || league.league == 'CDR') ">
                         <a ng-href="{{function(league)}}">League table</a>

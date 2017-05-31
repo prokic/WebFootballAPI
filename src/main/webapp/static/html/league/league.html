@@ -60,20 +60,12 @@
         </td>
     </tr>
     </tbody>
-    <tfoot style="border: none;border-collapse:separate">
-    <tr style="border: none">
-        <!--<td style="border: none">-->
-        <!--nesto-->
-        <!--</td>-->
-    </tr>
-    </tfoot>
 </table>
 <div ng-show="leagueFixtureBoolean">
-        <select ng-model="selectedMatchday">
-            <option ng-repeat="matchdays in [] | listOfMatchdays : keys" >{{matchdays}}</option>
-        </select>
+    <span><b>Choose matchday: </b></span><select ng-model="selectedMatchday">
+        <option ng-repeat="matchdays in [] | listOfMatchdays : keys">{{matchdays}}</option>
+    </select>
     <div ng-repeat="(key,fixturesWithMatchday) in fixtures">
-        {{key}}
         <div ng-repeat="fixture in fixturesWithMatchday" ng-show="key === selectedMatchday">
             {{fixture.homeTeamName}} {{fixture.awayTeamName}}
         </div>

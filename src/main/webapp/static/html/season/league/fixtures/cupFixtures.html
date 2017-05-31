@@ -1,3 +1,116 @@
 <body>
- Cup
+<span><button class="button" type="button" ng-click="leagueFixtureBoolean = false"
+              ng-class="leagueFixtureBoolean ? 'btn btn-default btn-sm' : 'btn btn-primary btn-sm'"> List Of Teams</button></span>
+<span><button class="button" type="button" ng-click="leagueFixtureBoolean = true"
+              ng-class="leagueFixtureBoolean ? 'btn btn-primary btn-sm' : 'btn btn-default btn-sm'"> Fixtures</button></span>
+<table class="table table-bordered" ng-show="!leagueFixtureBoolean">
+    <thead>
+    <tr style="background-color: darkgrey">
+        <th></th>
+        <th>Coat of arms</th>
+        <th>
+            <button ng-click="order('shortName')">Short Name<span ng-show="orderBY == 'shortName'"
+                                                                  ng-class='classArrow'></span></button>
+        </th>
+        <th>
+            <button ng-click="order('name')">Name<span ng-show="orderBY == 'name'" ng-class='classArrow'></span>
+            </button>
+        </th>
+        <th>
+            <button ng-click="order('value')">Squad market value<span ng-show="orderBY == 'value'"
+                                                                      ng-class='classArrow'></span></button>
+        </th>
+        <th>
+            <button ng-click="orderBY='';classArrow=''"> Set to unsorted</button>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="team in teams | orderBy:orderBY:reverse" style="background-color:mintcream">
+        <td style="vertical-align: middle"><b>{{$index+1}}.</b></td>
+        <td><img ng-src="{{team.crestUrl}}" width="50pxx" height="50ppx"></td>
+        <td style="vertical-align: middle">{{team.shortName}}</td>
+        <td style="vertical-align: middle">{{team.name}}</td>
+        <td style="vertical-align: middle">
+            <div>{{team.squadMarketValue}}</div>
+        </td>
+        <td>
+            <div class="dropdown">
+                <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">Options
+                    <span class="caret"></span></button>
+                <ul class="dropdown-menu ">
+                    <li><a href="#/season/team/{{team._links.self.href}}/fixtures">Fixtures</a></li>
+                    <li><a href="#/season/team/{{team._links.self.href}}/players">Players</a></li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div ng-show="leagueFixtureBoolean">
+    <!--<table class="table table-bordered">-->
+    <!--</thead>-->
+    <!--<tr style="background-color:mintcream " ng-repeat="oneFixture in fixture">-->
+    <!--<td ng-class="{ 'bold' : oneFixture.result.goalsHomeTeam > oneFixture.result.goalsAwayTeam }">-->
+    <!--{{oneFixture.homeTeamName}}-->
+    <!--</td>-->
+    <!--<td>-->
+    <!--<div>-->
+    <!--<span> ({{oneFixture.result.goalsHomeTeam}} : {{oneFixture.result.goalsAwayTeam}}) </span>-->
+    <!--</div>-->
+    <!--</td>-->
+    <!--<td ng-class="{ 'bold' : oneFixture.result.goalsHomeTeam < oneFixture.result.goalsAwayTeam  }">-->
+    <!--{{oneFixture.awayTeamName}}-->
+    <!--</td>-->
+    <!--</tr>-->
+    <!--</table>-->
+    <!--<table class="table table-bordered">-->
+    <!--</thead>-->
+    <!--<tr style="background-color:mintcream " ng-repeat="oneFixture in fixture">-->
+    <!--<td ng-class="{ 'bold' : oneFixture.result.goalsHomeTeam > oneFixture.result.goalsAwayTeam }">-->
+    <!--{{oneFixture.homeTeamName}}-->
+    <!--</td>-->
+    <!--<td>-->
+    <!--<div>-->
+    <!--<span> ({{oneFixture.result.goalsHomeTeam}} : {{oneFixture.result.goalsAwayTeam}}) </span>-->
+    <!--</div>-->
+    <!--</td>-->
+    <!--<td ng-class="{ 'bold' : oneFixture.result.goalsHomeTeam < oneFixture.result.goalsAwayTeam  }">-->
+    <!--{{oneFixture.awayTeamName}}-->
+    <!--</td>-->
+    <!--</tr>-->
+    <!--</table>-->
+    <span><b>Choose matchday: </b></span><select ng-model="selectedMatchday">
+    <option ng-repeat="matchdays in [] | listOfMatchdays : keys">{{matchdays}}</option>
+</select>
+    <div ng-repeat="(key,listOfMatchdays) in fixtures" ng-show="key === selectedMatchday">
+        <div ng-repeat="(keyFixture,listFix) in listOfMatchdays">
+            <div ng-if="keyFixture === '1'" ng-repeat="fixture in listFix">
+                {{fixture.homeTeamName}} {{fixture.awayTeamName}}
+            </div>
+            <div ng-if="keyFixture === '3'">
+                <div>ovo je novo</div>
+                <!--<div ng-repeat="fixture in listFix">-->
+                    <table class="table table-bordered" >
+                        </thead>
+                        <tr style="background-color:mintcream " ng-repeat="oneFixture in listFix">
+                            <td ng-class="{ 'bold' : oneFixture.result.goalsHomeTeam > oneFixture.result.goalsAwayTeam }">
+                                {{oneFixture.homeTeamName}}
+                            </td>
+                            <td>
+                                <div>
+                                    <span> ({{oneFixture.result.goalsHomeTeam}} : {{oneFixture.result.goalsAwayTeam}})</span>
+                                </div>
+                            </td>
+                            <td ng-class="{ 'bold' : oneFixture.result.goalsHomeTeam < oneFixture.result.goalsAwayTeam }">
+                                {{oneFixture.awayTeamName}}
+                            </td>
+                        </tr>
+                    </table>
+                    <!--{{fixture.homeTeamName}} {{fixture.awayTeamName}}-->
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+</div>
 </body>

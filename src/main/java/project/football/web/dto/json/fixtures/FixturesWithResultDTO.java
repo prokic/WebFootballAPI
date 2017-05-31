@@ -33,9 +33,6 @@ public class FixturesWithResultDTO {
         this.count = count;
     }
 
-    //    public List<FixtureWithResultDTO> getFixtures() {
-//        return fixtures;
-//    }
     public HashMap<Integer, List<FixtureWithResultDTO>> getFixtures() {
         return fixtures;
     }
@@ -45,7 +42,6 @@ public class FixturesWithResultDTO {
 
         for (int i = 0; i < fixtures.size(); i++) {
             if (fixtures.get(i).getMatchday() <= 0) {
-                System.out.println("Remove ovo: " + fixtures.get(i).getMatchday());
                 fixtures.remove(i);
                 i--;
             }
