@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import project.football.web.dto.json.link.LinkIDSelfDTO;
 
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;

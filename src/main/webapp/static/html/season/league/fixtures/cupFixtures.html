@@ -86,10 +86,25 @@
     <div ng-repeat="(key,listOfMatchdays) in fixtures" ng-show="key === selectedMatchday">
         <div ng-repeat="(keyFixture,listFix) in listOfMatchdays">
             <div ng-if="keyFixture === '1'" ng-repeat="fixture in listFix">
-                {{fixture.homeTeamName}} {{fixture.awayTeamName}}
+                <table class="table table-bordered" >
+                    </thead>
+                    <tr style="background-color:mintcream " ng-repeat="oneFixture in listFix">
+                        <td ng-class="{ 'bold' : oneFixture.result.goalsHomeTeam > oneFixture.result.goalsAwayTeam }">
+                            {{oneFixture.homeTeamName}}
+                        </td>
+                        <td>
+                            <div>
+                                <span> ({{oneFixture.result.goalsHomeTeam}} : {{oneFixture.result.goalsAwayTeam}})</span>
+                            </div>
+                        </td>
+                        <td ng-class="{ 'bold' : oneFixture.result.goalsHomeTeam < oneFixture.result.goalsAwayTeam }">
+                            {{oneFixture.awayTeamName}}
+                        </td>
+                    </tr>
+                </table>
             </div>
             <div ng-if="keyFixture === '3'">
-                <div>ovo je novo</div>
+                <!--<div>ovo je novo</div>-->
                 <!--<div ng-repeat="fixture in listFix">-->
                     <table class="table table-bordered" >
                         </thead>
